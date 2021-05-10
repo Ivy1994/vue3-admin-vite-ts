@@ -19,3 +19,6 @@
 #### 要是有看到的同学，可以is找我，一起学习~~
 >
 #### 楼主改用tsx的方式写了，兼容模板写法，请把原本的.vue声明加上！！作者已经删了
+
+#### 项目切换到组织中协作开发
+> https://github.com/web-learning-by-yuyuyu/vite-vue3-learning.git
