@@ -22,3 +22,20 @@
 
 #### 项目切换到组织中协作开发
 > https://github.com/web-learning-by-yuyuyu/vite-vue3-learning.git
+#### todo
+- [x] v-loading重写
+- [x] axios封装
+- [x] 动态路由引入
+- [x] 按钮权限
+- [x] 路由权限
+- [x] pinia数据存储
+- [x] 指令自动导入
+- [x] 组件自动导入
+- [x] 国际化
+- [x] tsx集成
+- [x] vite打包配置
+- [ ] cdn
+- [ ] 水印
+- [ ] 主题切换
+- [x] plugin模块化
+- [x] 按需引入
