@@ -1,6 +1,6 @@
-@import 'vxe-table/styles/variable.scss';
+@import "vxe-table/styles/variable.scss";
 
-$vxe-primary-color: #34D399;
+$vxe-primary-color: #34d399;
 
 html,
 body {
@@ -13,15 +13,13 @@ body {
     box-sizing: border-box;
   }
   .table-header {
-    background-color: #34D399;
+    background-color: #34d399;
     color: #fff;
   }
   .login-wapper {
     background-image: url("../assets/img/login_bg.png");
   }
 }
-
-
 
 /**
  * 全局滚动条样式
@@ -30,7 +28,7 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-  background-color:transparent;
+  background-color: transparent;
 }
 
 // 滚动条轨道
@@ -45,4 +43,4 @@ body {
   background-color: rgba(144, 147, 153, 0.3);
   cursor: pointer;
 }
-@import 'vxe-table/styles/modules.scss';
+@import "vxe-table/styles/modules.scss";

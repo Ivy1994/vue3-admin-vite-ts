@@ -1,19 +1,48 @@
 .login-input {
   .el-input__inner {
-  opacity: .6;
-  line-height: 43px;
-  height: 43px;
-  transition: .5s;
-  font-size: 16px;
-  font-family: monospace;
-  padding-left: 40px;
-  &:focus {
-    border: 1px solid;
-    border-color: #FECACA ;
+    opacity: 0.6;
+    line-height: 43px;
+    height: 43px;
+    transition: 0.5s;
+    font-size: 16px;
+    font-family: monospace;
+    padding-left: 40px;
+    &:focus {
+      border: 1px solid;
+      border-color: #fecaca;
+    }
   }
-  }
-  .el-input__prefix{
+  .el-input__prefix {
     font-size: 25px;
     top: 4px;
+  }
+}
+html {
+  body {
+    .el-loading-spaner-z {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+    .loading-text {
+      animation: blink 2s linear infinite;
+      -webkit-animation: blink 2s linear infinite;
+      -moz-animation: blink 2s linear infinite;
+      -ms-animation: blink 2s linear infinite;
+      -o-animation: blink 2s linear infinite;
+    }
+  }
+}
+@keyframes blink {
+  0% {
+    color: #34d399;
+  }
+
+  50% {
+    color: transparent;
+  }
+
+  100% {
+    color: #34d399;
   }
 }

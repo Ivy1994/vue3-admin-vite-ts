@@ -14,7 +14,7 @@ const layout = defineComponent({
           </div>
           <div class="flex-1 main-content">
             <z-tags class="hidden md4:flex"></z-tags>
-            <router-view class="p-2 flex-1 h-auto overflow-y-scroll"></router-view>
+            <router-view class="p-2 flex-1 h-auto overflow-y-scroll relative"></router-view>
           </div>
         </div>
       </div>
