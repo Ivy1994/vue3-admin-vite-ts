@@ -6,3 +6,15 @@ declare module "axios" {
     (config: AxiosRequestConfig): Promise<any>;
   }
 }
+
+interface AppGolbalConfig {
+  $t: Function;
+  $echarts: Function;
+  $alert: Function;
+  $confirm: Function;
+  $messageBox: Function;
+  $message: Function;
+  $msgbox: Function;
+  $notify: Function;
+  $msgbox: Function;
+}

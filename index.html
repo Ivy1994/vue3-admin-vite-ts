@@ -7,7 +7,85 @@
     <title><%- title %></title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <style>
+        * {
+          padding: 0;
+          margin: 0;
+        }
+        .w-screen {
+          width: 100vw;
+        }
+        .h-screen {
+          height: 100vh;
+        }
+        .center-bar {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        .bar:nth-child(1) {
+          animation-delay: 0.2s;
+        }
+        .bar:nth-child(2) {
+          animation-delay: 0.4s;
+        }
+        .bar:nth-child(3) {
+          animation-delay: 0.6s;
+        }
+        .bar:nth-child(4) {
+          animation-delay: 0.8s;
+        }
+        .bar:nth-child(5) {
+          animation-delay: 1s;
+        }
+        .bar:nth-child(6) {
+          animation-delay: 1.2s;
+        }
+        .bar:nth-child(7) {
+          animation-delay: 1.4s;
+        }
+        .bar:nth-child(8) {
+          animation-delay: 1.6s;
+        }
+        @keyframes loading {
+          0% {
+            transform: scaleY(0.1);
+            background-color: transparent;
+          }
+          50% {
+            transform: scaleY(1);
+            background-color: #2ecc71;
+          }
+          100% {
+            transform: scaleY(0.1);
+            background-color: transparent;
+          }
+        }
+        .bar {
+          width: 4px;
+          height: 45px;
+          background-color: transparent;
+          display: inline-block;
+          transform-origin: botton center;
+          animation: loading 1.5s ease-in-out infinite;
+          margin-left: 3px;
+        }
+      </style>
+      <div class="w-screen h-screen">
+        <div class=" center-bar">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

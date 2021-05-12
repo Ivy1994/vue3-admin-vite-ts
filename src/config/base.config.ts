@@ -14,6 +14,6 @@ export const baseConfig: BaseConfig = {
   duration: 3000,
   tokenExpireTIme: 72, //单位小时
   routerPreDir: "./", //如果项目时放在网站的某一级目录下，一定要填写这个
-  sysName: "风雨见性admin",
+  sysName: "小裁缝",
   skipToken: false,
 };

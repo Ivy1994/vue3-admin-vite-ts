@@ -81,7 +81,6 @@ import {
   ElTree,
   ElUpload,
   ElInfiniteScroll,
-  ElLoading,
   ElMessage,
   ElMessageBox,
   ElNotification,} from 'element-plus';
@@ -168,7 +167,6 @@ const elComponents =[ElAlert,
   ElUpload,]
 const plugins = [
   ElInfiniteScroll,
-  ElLoading,
   ElMessage,
   ElMessageBox,
   ElNotification,

@@ -3,8 +3,8 @@ import { AppRouteRecordRawT } from "@router/types";
 import { router } from "@router/index";
 import { baseRoutes } from "@router/baseRoute";
 
-const tags: AppRouteRecordRawT[] = [];/* 动态增加的tags */
-const fixedTags: AppRouteRecordRawT[] = [];/* 固定tags */
+const tags: AppRouteRecordRawT[] = []; /* 动态增加的tags */
+const fixedTags: AppRouteRecordRawT[] = []; /* 固定tags */
 export const useSysStore = defineStore({
   id: "sys",
   state() {
@@ -17,7 +17,7 @@ export const useSysStore = defineStore({
   },
   actions: {
     addTages(item: AppRouteRecordRawT) {
-      //@ts-ignore      
+      //@ts-ignore
       /* 添加item，判断当前的路由是否存在，如果存在进入 */
       const isExist: boolean = this.tags.some(
         v =>
@@ -29,7 +29,7 @@ export const useSysStore = defineStore({
           /* 存在于固定tags中 */
           v.name === item.name
       );
-      const isRoot: boolean = ["404","403","login"].includes(item.name);
+      const isRoot: boolean = ["404", "403", "login"].includes(item.name);
       !isExist && !isExistInFixed && !isRoot ? this.tags.push(item) : "";
     },
     removeItem(item) {
@@ -37,6 +37,15 @@ export const useSysStore = defineStore({
       let index: number = this.tags.findIndex(v => v?.name === item.name);
       this.tags.splice(index, 1);
       this.toRePath(index, item.name);
+    },
+    deletByName(name: string) {
+      const item = this.findItemByName(name);
+      this.removeItem(item);
+    },
+    findItemByName(name: string) {
+      return this.tags.find(v => {
+        return v.name === name;
+      });
     },
     toRePath(index: number, name: string): void {
       /* 删除固定项的处理 */

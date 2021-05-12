@@ -1,10 +1,20 @@
 import tableModel from "@apis/table/table";
-import { defineComponent, onMounted, reactive, ref, withModifiers } from "vue";
+import { AppGolbalConfig } from "types";
+import {
+  defineComponent,
+  inject,
+  onMounted,
+  reactive,
+  ref,
+  withModifiers,
+} from "vue";
 import { VxeTableInstance } from "vxe-table";
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {
     const baseTableRef = ref({} as VxeTableInstance);
+    const _app = inject("_app") as AppGolbalConfig;
+    const { $echarts } = _app;
     const loading = ref(false);
     const pageConf = reactive({
       pageSize: 20,

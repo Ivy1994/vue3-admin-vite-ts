@@ -8,7 +8,7 @@ const createInstance = (el, binding) => {
   const vm = binding.instance;
   /*
    *   使用方式
-   *          v-loading={[true, "", ["body", "fullscreen"]]}
+   *  v-loading={[true, "", ["body", "fullscreen"]]}
    */
   el.instance = Loading({
     text: (vm && vm[textExr]) || textExr,

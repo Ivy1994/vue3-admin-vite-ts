@@ -1,9 +1,13 @@
 import { AppRouteRecordRawT } from "@router/types";
+import { h } from "vue";
 const layout = () => import(/* webpackTrunkName: "layout" */ "@layouts/Layout");
 const index = () => import(/* webpackTrunkName: "index" */ "@views/index");
-const i18n = ()=>import(/* webpackTrunkName:"i18n" */"@views/i18n/i18n");
-const base_table = ()=>import(/* webpackTrunkName:"baseTable" */"@views/table/baseTable");
-const gridTable = ()=>import(/* webpackTrunkName:"gridTable" */"@views/table/gridTable");
+const i18n = () => import(/* webpackTrunkName:"i18n" */ "@views/i18n/i18n");
+const base_table = () =>
+  import(/* webpackTrunkName:"baseTable" */ "@views/table/baseTable");
+const gridTable = () =>
+  import(/* webpackTrunkName:"gridTable" */ "@views/table/gridTable");
+import indexMd from "@views/index.md";
 
 const asyncRouter: AppRouteRecordRawT[] = [
   {
@@ -14,17 +18,17 @@ const asyncRouter: AppRouteRecordRawT[] = [
     meta: {
       title: "首页",
       permissions: ["edit"],
-      icon:"iconfont iconshouye"
+      icon: "iconfont iconshouye",
     },
     children: [
       {
         path: "dashBord",
         name: "dashBord",
-        component: index,
+        component: indexMd,
         meta: {
           title: "控制台",
           permissions: ["author"],
-          icon:"iconfont iconkongzhitai_"
+          icon: "iconfont iconkongzhitai_",
         },
       },
     ],
@@ -37,50 +41,49 @@ const asyncRouter: AppRouteRecordRawT[] = [
     meta: {
       title: "i18n",
       permissions: ["edit"],
-      icon:"iconfont iconicon-test"
-
+      icon: "iconfont iconicon-test",
     },
-    children:[
+    children: [
       {
-        path:"index",
-        name:"i18nIndex",
-        component:i18n,
-        meta:{
-          title:"i18n",
-          icon:"iconfont iconin"
-        }
-      }
-    ]
+        path: "index",
+        name: "i18nIndex",
+        component: i18n,
+        meta: {
+          title: "i18n",
+          icon: "iconfont iconin",
+        },
+      },
+    ],
   },
   {
-    path:"/table",
-    name:"table",
-    redirect:"/table/baseTable",
-    component:layout,
-    meta:{
-      title:"表格",
-      icon:"iconfont iconbiaoge"
+    path: "/table",
+    name: "table",
+    redirect: "/table/baseTable",
+    component: layout,
+    meta: {
+      title: "表格",
+      icon: "iconfont iconbiaoge",
     },
-    children:[
+    children: [
       {
-        path:"baseTable",
-        name:"baseTable",
-        component:base_table,
-        meta:{
-          title:"基础表格",
-          icon:"iconfont icon3jichubiaoge"
-        }
+        path: "baseTable",
+        name: "baseTable",
+        component: base_table,
+        meta: {
+          title: "基础表格",
+          icon: "iconfont icon3jichubiaoge",
+        },
       },
       {
-        path:"gridTable",
-        name:"gridTable",
-        component:gridTable,
-        meta:{
-          title:"grid表格",
-          icon:"iconfont iconGridView"
-        }
+        path: "gridTable",
+        name: "gridTable",
+        component: gridTable,
+        meta: {
+          title: "grid表格",
+          icon: "iconfont iconGridView",
+        },
       },
-    ]
-  }
+    ],
+  },
 ];
 export default asyncRouter;

@@ -6,12 +6,22 @@ import { minifyHtml, injectHtml } from "vite-plugin-html";
 // import vueI18n from '@intlify/vite-plugin-vue-i18n'
 import { viteMockServe } from "vite-plugin-mock";
 import styleImport from "vite-plugin-style-import";
+import Markdown from "vite-plugin-md";
+
 import vue from "@vitejs/plugin-vue";
 import tsconfigPaths from "vite-tsconfig-paths";
-import path from "path";
 export function setPlugins(command: string) {
   const plugins: any[] = [];
-  plugins.push(vue());
+  plugins.push(
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    })
+  );
+  plugins.push(
+    Markdown({
+      headEnabled: true, // <--
+    })
+  );
   // 引入国际化
   // plugins.push(vueI18n({
   //   compositionOnly:false,
@@ -56,7 +66,7 @@ export function setPlugins(command: string) {
   plugins.push(
     injectHtml({
       injectData: {
-        title: "vite2-by-i94xhn",
+        title: "小裁缝",
         // injectScript: `<link rel="stylesheet" href="./tailwind.css">`,
       },
     })

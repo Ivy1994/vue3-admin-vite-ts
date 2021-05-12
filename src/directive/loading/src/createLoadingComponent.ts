@@ -3,7 +3,6 @@
 import { createVNode, h, reactive, ref, render, toRefs, Transition, VNode, vShow, withCtx, withDirectives } from 'vue'
 import { removeClass } from 'element-plus/es/utils/dom'
 import type { ILoadingCreateComponentParams, ILoadingInstance } from './loading.type'
-import { divide } from 'xe-utils'
 
 export function createLoadingComponent({
   options,
@@ -11,7 +10,7 @@ export function createLoadingComponent({
 }: ILoadingCreateComponentParams): ILoadingInstance {
   let vm: VNode = null
   let afterLeaveTimer: Nullable<number> = null
-
+  /* 创建data */
   const afterLeaveFlag = ref(false)
   const data = reactive({
     ...options,
@@ -19,11 +18,11 @@ export function createLoadingComponent({
     originalOverflow: '',
     visible: false,
   })
-
+  /* 设置文本 */
   function setText(text: string) {
     data.text = text
   }
-
+  /* 销毁 */
   function destroySelf() {
     const target = data.parent
     if (!target.vLoadingAddClassList) {
@@ -41,7 +40,7 @@ export function createLoadingComponent({
       vm.el.parentNode.removeChild(vm.el)
     }
   }
-
+/* 关闭 */
   function close() {
     const target = data.parent
     target.vLoadingAddClassList = null
@@ -59,20 +58,20 @@ export function createLoadingComponent({
     }, 400)
     data.visible = false
   }
-
+/* 关闭之前的调用 */
   function handleAfterLeave() {
     if (!afterLeaveFlag.value) return
     afterLeaveFlag.value = false
     destroySelf()
   }
-
+/* v3的setup */
   const componentSetupConfig = {
     ...toRefs(data),
     setText,
     close,
     handleAfterLeave,
   }
-
+  /* 生成组件 */
   const elLoadingComponent = {
     name: 'ElLoading',
     setup() {
@@ -128,7 +127,7 @@ export function createLoadingComponent({
       })
     },
   }
-
+  /* 创建vNode */
   vm = createVNode(elLoadingComponent)
 
   render(vm, document.createElement('div'))
