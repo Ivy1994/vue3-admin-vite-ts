@@ -83,6 +83,7 @@ import {
   ElInfiniteScroll,
   ElMessage,
   ElMessageBox,
+  ElLoading,
   ElNotification,} from 'element-plus';
 import 'element-plus/packages/theme-chalk/src/base.scss';
 import ElementLocale from 'element-plus/lib/locale'

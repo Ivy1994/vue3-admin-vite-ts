@@ -31,7 +31,11 @@ const zSlider = defineComponent({
               v-slots={{
                 title: () => (
                   <div>
-                    <i class={v.meta.icon +" text-lg px-2"}></i>
+                    <svg-icon
+                      size={20}
+                      class="inline-block w-auto px-2"
+                      name={v.meta.icon}
+                    ></svg-icon>
                     <span>{v.meta.title}</span>
                   </div>
                 ),
@@ -48,7 +52,11 @@ const zSlider = defineComponent({
                 title: () => <span>{v.meta.title}</span>,
               }}
             >
-              <i class={v.meta.icon+" text-lg px-2"}></i>
+              <svg-icon
+                size={20}
+                class="inline-block w-auto px-2"
+                name={v.meta.icon}
+              ></svg-icon>
             </el-menu-item>
           );
         }
@@ -63,20 +71,20 @@ const zSlider = defineComponent({
       <>
         <div
           class={
-            "h-full max-w-xl hidden mmd:block delay-300 shadow-2xl	 ease-in-out transition-all" +
+            "h-screen max-w-xl hidden mmd:block delay-300 shadow-2xl	 ease-in-out transition-all" +
             (isCollapse.value ? " w-20" : "  w-40 md:w-64")
           }
           style="box-shadow:5px 0 10px #ddd"
         >
+          <z-logo></z-logo>
           <el-menu
+            size="mini"
             default-active={activePAth.value}
             onSelect={handleSelect}
             menu-trigger="click"
-            backgroundColor="#1F2937"
-            textColor="#D1D5DB"
             active-text-color="#F87171"
             collapse={isCollapse.value}
-            class="w-full height-slider"
+            class="w-full h-auto"
             unique-opened={true}
           >
             {slot(routeStore.asyncRouts)}
@@ -95,8 +103,6 @@ const zSlider = defineComponent({
               default-active={activePAth.value}
               onSelect={handleSelect}
               menu-trigger="click"
-              backgroundColor="#1F2937 "
-              textColor="#D1D5DB"
               active-text-color="#F87171"
               class=" w-full h-screen"
             >

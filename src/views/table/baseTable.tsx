@@ -41,6 +41,11 @@ const baseTable = defineComponent({
           loading.value = false;
         });
     };
+    const inputSlot = {
+      default: ({ row }) => (
+        <el-input size="mini" v-model={row.name}></el-input>
+      ),
+    };
     const searchMethod = e => {
       let { pageSize, currentPage, type } = e;
       if (type === "size") {
@@ -50,11 +55,14 @@ const baseTable = defineComponent({
         getTableData();
       }
     };
+    const handINput = row => {
+      const rows = Object.assign(row, { name: "1111" });
+      baseTableRef.value.reloadRow([rows]);
+    };
     return () => (
       <div>
         <vxe-table
           v-loading={loading.value}
-          element-loading-text="拼命加载中"
           header-row-class-name="table-header"
           border="full"
           align="center"
@@ -69,6 +77,28 @@ const baseTable = defineComponent({
           <vxe-table-column field="positon" title="岗位"></vxe-table-column>
           <vxe-table-column field="ins" title="简介"></vxe-table-column>
           <vxe-table-column field="email" title="邮箱"></vxe-table-column>
+          <vxe-table-column
+            field=""
+            title="test"
+            v-slots={{
+              default: ({ row }) => {
+                return (
+                  <el-button
+                    size="mini"
+                    type="success"
+                    onClick={handINput.bind(this, row)}
+                  >
+                    update
+                  </el-button>
+                );
+              },
+            }}
+          ></vxe-table-column>
+          <vxe-table-column
+            field=""
+            title="input"
+            v-Slots={inputSlot}
+          ></vxe-table-column>
           <vxe-table-column
             field="domain"
             title="域名"

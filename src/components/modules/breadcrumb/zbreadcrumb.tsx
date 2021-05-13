@@ -5,11 +5,11 @@ import { computed } from "vue";
 const zBreadcrumb = defineComponent({
   name: "zBreadcrumb",
   setup(prop, ctx) {
-    const useStore = useSysStore();    
+    const useStore = useSysStore();
     const isExp = computed(() => {
       return useStore.collapse;
     });
-    const route = useRoute();    
+    const route = useRoute();
     const exp = () => {
       /* 改变全局状态 */
       useStore.$patch({
@@ -17,17 +17,17 @@ const zBreadcrumb = defineComponent({
       });
     };
     return () => (
-      <div class="h-full flex items-center truncate">
+      <div class="h-full pl-4 flex items-center truncate">
         <i
           onClick={exp}
           class={
-            "el-icon-s-unfold font-light text-gray-600 text-3xl cursor-pointer transform hover:scale-110 duration-500" +
+            "el-icon-s-unfold font-light text-gray-600 text-xl cursor-pointer transform hover:scale-110 duration-500" +
             (isExp.value ? " rotate-180" : "")
           }
         ></i>
         <el-breadcrumb
-          separator-class="el-icon-arrow-right text-red-300"
-          class="px-4 w-max"
+          separator-class="el-icon-arrow-right text-red-300 "
+          class="px-4 w-max text-base"
         >
           {route.matched.map(v => {
             return (

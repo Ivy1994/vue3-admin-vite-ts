@@ -9,12 +9,20 @@ body {
   height: 100%;
   width: 100%;
   font-size: 14px;
+  font-family: Noto Sans SC !important;
+  font-weight: 400;
   div {
     box-sizing: border-box;
   }
   .table-header {
     background-color: #34d399;
     color: #fff;
+  }
+  .markdown-body {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
   }
   .login-wapper {
     background-image: url("../assets/img/login_bg.png");

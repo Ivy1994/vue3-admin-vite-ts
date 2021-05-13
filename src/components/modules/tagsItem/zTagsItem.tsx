@@ -162,7 +162,8 @@ const zTagItem = defineComponent({
             route={prop.item.name}
             class={
               "w-4 pl-1 text-center align-middle flex items-center justify-center" +
-              (prop.closeAbled ? " hidden" : "")
+              (prop.closeAbled ? " hidden" : "") +
+              (route.name === prop.item.name ? "" : " hidden")
             }
           >
             <i

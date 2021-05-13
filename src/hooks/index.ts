@@ -10,11 +10,11 @@ export const useVisibility = {
         if (document.visibilityState === "hidden") {
           orginTitle = document.title;
           document.title = "别看我别看我别...看我呀";
-          changeIco("/miss_favicon.ico");
+          changeIco("./miss_favicon.ico");
           pageStatus = "hidden";
         } else {
           document.title = orginTitle;
-          changeIco("/favicon.ico");
+          changeIco("./favicon.ico");
           pageStatus = "visible";
         }
       },

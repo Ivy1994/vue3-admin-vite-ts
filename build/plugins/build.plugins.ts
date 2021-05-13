@@ -7,7 +7,8 @@ import { minifyHtml, injectHtml } from "vite-plugin-html";
 import { viteMockServe } from "vite-plugin-mock";
 import styleImport from "vite-plugin-style-import";
 import Markdown from "vite-plugin-md";
-
+import viteSvgIcons from "vite-plugin-svg-icons";
+import path from "path";
 import vue from "@vitejs/plugin-vue";
 import tsconfigPaths from "vite-tsconfig-paths";
 export function setPlugins(command: string) {
@@ -20,6 +21,14 @@ export function setPlugins(command: string) {
   plugins.push(
     Markdown({
       headEnabled: true, // <--
+    })
+  );
+  plugins.push(
+    viteSvgIcons({
+      // Specify the icon folder to be cached
+      iconDirs: [path.resolve(process.cwd(), "src/icons")],
+      // Specify symbolId format
+      symbolId: "icon-[dir]-[name]",
     })
   );
   // 引入国际化

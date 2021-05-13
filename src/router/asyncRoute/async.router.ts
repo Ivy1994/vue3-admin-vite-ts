@@ -18,7 +18,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
     meta: {
       title: "首页",
       permissions: ["edit"],
-      icon: "iconfont iconshouye",
+      icon: "index",
     },
     children: [
       {
@@ -28,7 +28,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
         meta: {
           title: "控制台",
           permissions: ["author"],
-          icon: "iconfont iconkongzhitai_",
+          icon: "index",
         },
       },
     ],
@@ -41,7 +41,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
     meta: {
       title: "i18n",
       permissions: ["edit"],
-      icon: "iconfont iconicon-test",
+      icon: "i18n-index",
     },
     children: [
       {
@@ -50,7 +50,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
         component: i18n,
         meta: {
           title: "i18n",
-          icon: "iconfont iconin",
+          icon: "i18n",
         },
       },
     ],
@@ -62,7 +62,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
     component: layout,
     meta: {
       title: "表格",
-      icon: "iconfont iconbiaoge",
+      icon: "table-index",
     },
     children: [
       {
@@ -71,7 +71,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
         component: base_table,
         meta: {
           title: "基础表格",
-          icon: "iconfont icon3jichubiaoge",
+          icon: "base-table",
         },
       },
       {
@@ -80,7 +80,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
         component: gridTable,
         meta: {
           title: "grid表格",
-          icon: "iconfont iconGridView",
+          icon: "grid",
         },
       },
     ],

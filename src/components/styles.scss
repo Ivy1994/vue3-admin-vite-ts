@@ -1,44 +1,44 @@
 .z-button {
-   @apply inline-block transition-all outline-none bg-blue-600 focus:border-blue-300  px-4 py-2 bg-blue-600	focus:border-blue-300 rounded-lg text-white m-1 duration-500  text-center truncate max-w-xs;
-   &:hover,&:focus{
-      @apply outline-none  ring bg-opacity-70
-   }
-   &.round {
-      @apply rounded-full
-   }
-   &.success {
-      @apply bg-green-400;
-   }
-   &.error {
-      @apply bg-red-400;
-   }
-   &.warning {
-      @apply bg-yellow-500;
-   }
-   &.info {
-      @apply bg-gray-400;
-   }
-   &.text {
-      @apply px-2 py-1 ring-0 border-none rounded-none text-blue-500 border-0 bg-transparent
-   }
+  @apply inline-block transition-all outline-none bg-blue-600 focus:border-blue-300  px-4 py-2 bg-blue-600	focus:border-blue-300 rounded-lg text-white m-1 duration-500  text-center truncate max-w-xs;
+  &:hover,
+  &:focus {
+    @apply outline-none  ring bg-opacity-70;
+  }
+  &.round {
+    @apply rounded-full;
+  }
+  &.success {
+    @apply bg-green-400;
+  }
+  &.error {
+    @apply bg-red-400;
+  }
+  &.warning {
+    @apply bg-yellow-500;
+  }
+  &.info {
+    @apply bg-gray-400;
+  }
+  &.text {
+    @apply px-2 py-1 ring-0 border-none rounded-none text-blue-500 border-0 bg-transparent;
+  }
 }
 .word-inline {
-   word-break: keep-all;
+  word-break: keep-all;
 }
 .setting-login {
-   width: 14px;
+  width: 14px;
 }
 .height-slider {
-   height: calc(100vh - 42px);
+  height: calc(100vh - 42px);
 }
-.main-content{
-   height: calc(100vh - 50px);
-   overflow-y: hidden;
-   display: flex;
-   flex-direction: column;
+.main-content {
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .rigth-menu {
-   position: absolute;
-   border: 1px solid #ddd;
-   border-radius: 4px;
+  position: absolute;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
