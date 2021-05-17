@@ -6,6 +6,8 @@ import {
   BarSeriesOption,
   LineChart,
   LineSeriesOption,
+  PieSeriesOption,
+  PieChart
 } from "echarts/charts";
 import {
   TitleComponent,
@@ -14,6 +16,9 @@ import {
   GridComponent,
   GridComponentOption,
   TooltipComponent,
+  LegendComponent,
+  ToolboxComponent
+
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 
@@ -23,13 +28,17 @@ export type ECOption = echarts.ComposeOption<
   | LineSeriesOption
   | TitleComponentOption
   | GridComponentOption
+  | PieSeriesOption
+
 >;
 echarts.use([
   TitleComponent,
   TooltipComponent,
   GridComponent,
   BarChart,
-  CanvasRenderer,
+  LineChart,
+  PieChart,
+  CanvasRenderer,ToolboxComponent,LegendComponent
 ]);
 
 export default {
