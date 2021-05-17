@@ -1,4 +1,4 @@
-import { defineAsyncComponent, App } from "vue";
+import { defineAsyncComponent, App, Slots } from "vue";
 import "./styles.scss";
 function getModules() {
   const components = import.meta.glob("./modules/**/*.tsx");
@@ -13,10 +13,10 @@ export const asyncComponent = function(app: App<Element>): void {
   const modules = getModules();
   const components = getComponents();
   Object.keys(modules).forEach(async (v: string) => {
-    const viewSrc = components[v];
+    const viewSrc = components[v] as Slots;
     const file = viewSrc.default;
     const AsyncComponent = await defineAsyncComponent(modules[v]); // 异步组件
-    app.component(file.name, AsyncComponent);
+    app.component(file?.name || "", AsyncComponent);
   });
 };
 

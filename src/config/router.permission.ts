@@ -3,7 +3,7 @@ import { RouteRecordRaw } from "vue-router";
 import { router } from "@router/index";
 import { useUserStore } from "@store/user";
 import { useRouteStore } from "@store/routes";
-import { filterRoutes } from "@router/utils";
+import { filterRoutes, hasKeep } from "@router/utils";
 import { AppRouteRecordRawT } from "@router/types";
 import { baseConfig } from "./base.config";
 import { ElNotification } from "element-plus";
@@ -63,4 +63,5 @@ router.afterEach(to => {
     acitveName: to.name as string,
   });
   sysStore.addTages(to as AppRouteRecordRawT);
+  to.meta?.keep && sysStore.addKeep(to.name as string);
 });

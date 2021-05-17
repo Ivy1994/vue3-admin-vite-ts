@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
-    "typeRoots": ["./node_modules/@types/", "./types","./src/types"],
+    "typeRoots": ["./node_modules/@types/", "./types", "./src/types"],
     "incremental": false,
     "noImplicitAny": false,
     "skipLibCheck": true,
@@ -28,13 +28,14 @@
       "@types/*": ["./src/types/*"],
       "@views/*": ["./src/views/*"],
       "@mock/*": ["./src/mock/*"],
-      "@layouts/*":["./src/layouts/*"],
-      "@locales/*":["./src/locales/*"]
+      "@layouts/*": ["./src/layouts/*"],
+      "@locales/*": ["./src/locales/*"]
     }
   },
   "exclude": ["node_modules", "dist"],
   "include": [
     "src/**/*.ts",
+    "src/**/*.md",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
@@ -43,5 +44,5 @@
     "build/**/*.ts",
     "build/**/*.d.ts",
     "mock/**/*.ts"
-, "src/App.tsx", "src/components/tsxtest.jsx", "src/App.ssx"  ]
+  ]
 }

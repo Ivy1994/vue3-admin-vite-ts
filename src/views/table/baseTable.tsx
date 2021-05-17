@@ -15,6 +15,7 @@ const baseTable = defineComponent({
     const baseTableRef = ref({} as VxeTableInstance);
     const _app = inject("_app") as AppGolbalConfig;
     const { $echarts } = _app;
+    const tableData = ref([]);
     const loading = ref(false);
     const pageConf = reactive({
       pageSize: 20,
@@ -32,7 +33,8 @@ const baseTable = defineComponent({
           currentPage: pageConf.currentPage,
         })
         .then(res => {
-          baseTableRef.value.loadData(res.list);
+          // baseTableRef.value.loadData(res.list);
+          tableData.value = res.list;
           pageConf.total = res.total;
           loading.value = false;
         })
@@ -66,18 +68,44 @@ const baseTable = defineComponent({
           header-row-class-name="table-header"
           border="full"
           align="center"
-          auto-resize
           height="400px"
+          autoResize={true}
           ref={baseTableRef}
+          data={tableData.value}
         >
-          <vxe-table-column type="seq" title="#"></vxe-table-column>
-          <vxe-table-column field="name" title="姓名"></vxe-table-column>
-          <vxe-table-column field="date" title="出生日期"></vxe-table-column>
-          <vxe-table-column field="sex" title="性别"></vxe-table-column>
-          <vxe-table-column field="positon" title="岗位"></vxe-table-column>
-          <vxe-table-column field="ins" title="简介"></vxe-table-column>
-          <vxe-table-column field="email" title="邮箱"></vxe-table-column>
+          <vxe-table-column width="80" type="seq" title="#"></vxe-table-column>
           <vxe-table-column
+            width="200"
+            field="name"
+            title="姓名"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
+            field="date"
+            title="出生日期"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
+            field="sex"
+            title="性别"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
+            field="positon"
+            title="岗位"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
+            field="ins"
+            title="简介"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
+            field="email"
+            title="邮箱"
+          ></vxe-table-column>
+          <vxe-table-column
+            width="200"
             field=""
             title="test"
             v-slots={{
@@ -97,10 +125,12 @@ const baseTable = defineComponent({
           <vxe-table-column
             field=""
             title="input"
+            width="200"
             v-Slots={inputSlot}
           ></vxe-table-column>
           <vxe-table-column
             field="domain"
+            width="200"
             title="域名"
             sortable
             filters={[

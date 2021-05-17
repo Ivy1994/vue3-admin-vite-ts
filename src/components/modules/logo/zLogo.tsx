@@ -32,7 +32,7 @@ const zLogo = defineComponent({
       },
     };
     return () => (
-      <div class="hidden py-10 md:flex flex-col items-center w-full justify-center cursor-pointer overflow-hidden">
+      <div class=" py-10 flex flex-col items-center w-full justify-center cursor-pointer overflow-hidden">
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
         <div
           class={

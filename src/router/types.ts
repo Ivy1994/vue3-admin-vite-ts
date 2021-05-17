@@ -1,12 +1,14 @@
-import { RouteRecordRaw} from "vue-router"
+import { RouteRecordRaw } from "vue-router";
+
 interface RouteMeta {
-  title?:string,
-  icon?:string,
-  isHidden?:boolean,
-  eachInMenu?:boolean,
-  permissions?:string[],
- }
- //@ts-ignore
+  title?: string;
+  icon?: string;
+  isHidden?: boolean;
+  eachInMenu?: boolean;
+  permissions?: string[];
+  keep?: boolean;
+}
+//@ts-ignore
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, "meta"> {
   name: string;
   meta: RouteMeta;

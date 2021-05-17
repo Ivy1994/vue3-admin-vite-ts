@@ -42,3 +42,85 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+.slider-bar {
+  .el-submenu {
+    &.is-opened {
+      outline: 0 !important;
+      @apply bg-blue-100;
+    }
+    .el-submenu__title:focus,
+    .el-submenu__title:hover {
+      outline: 0 !important;
+      @apply bg-blue-100;
+    }
+  }
+}
+/*v-enter 是进入之前，元素的起始状态*/
+/*v-leave-to 离开之后动画的终止状态*/
+.v-enter,
+.v-leave-to {
+  opacity: 0; /*透明度*/
+  transform: scale3d(-45edge);
+}
+/*入场(离场)动画的时间段   */
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.8s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s;
+}
+.scale-enter,
+.scale-leave-to {
+  transform: scale(0);
+}
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.4s;
+}
+.left-enter,
+.left-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.left-leave,
+.left-enter-to {
+  transform: translate3d(0, 0, 0);
+}
+.left-enter-active,
+.left-leave-active {
+  transition: all 0.4s;
+}
+.right-enter,
+.right-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+/* .right-leave,
+.right-enter-to {
+  transform: translate3d(0, 0, 0);
+} */
+.right-enter-active,
+.right-leave-active {
+  transition: all 0.4s;
+}
+/* .top-enter,
+.top-leave-to {
+  transform: translate3d(0, -100%, 0);
+} */
+.top-leave,
+.top-enter-to {
+  transform: translate3d(0, 0, 0);
+}
+/* .top-enter-active,
+.top-leave-active {
+  transition: all 0.4s;
+} */
+
+.right-border-shadow {
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0px 10px #ddd;
+}

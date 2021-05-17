@@ -1,11 +1,13 @@
 import { useRouteStore } from "@store/routes";
 import { useSysStore } from "@store/sys";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, TransitionGroup } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
 
 const zSlider = defineComponent({
   name: "zSlider",
+  components: { TransitionGroup },
+
   setup(prop, ctx) {
     const sysStore = useSysStore();
     const isCollapse = computed(() => {
@@ -84,13 +86,13 @@ const zSlider = defineComponent({
             menu-trigger="click"
             active-text-color="#F87171"
             collapse={isCollapse.value}
-            class="w-full h-auto"
+            class="w-full h-auto slider-bar"
             unique-opened={true}
           >
             {slot(routeStore.asyncRouts)}
           </el-menu>
         </div>
-        <div class="mmd:hidden">
+        <div class="mmd:hidden h-screen">
           <el-drawer
             modelValue={isCollapse.value}
             direction="ltr"
@@ -99,15 +101,18 @@ const zSlider = defineComponent({
             size="60%"
             before-close={beforeClose}
           >
-            <el-menu
-              default-active={activePAth.value}
-              onSelect={handleSelect}
-              menu-trigger="click"
-              active-text-color="#F87171"
-              class=" w-full h-screen"
-            >
-              {slot(routeStore.asyncRouts)}
-            </el-menu>
+            <div>
+              <z-logo></z-logo>
+              <el-menu
+                default-active={activePAth.value}
+                onSelect={handleSelect}
+                menu-trigger="click"
+                active-text-color="#F87171"
+                class="w-full h-auto slider-bar"
+              >
+                {slot(routeStore.asyncRouts)}
+              </el-menu>
+            </div>
           </el-drawer>
         </div>
       </>

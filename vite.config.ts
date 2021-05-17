@@ -41,6 +41,11 @@ export default async ({
         output: {
           manualChunks: {
             "element-plus": ["element-plus"],
+            "vxe-table": ["vxe-table"],
+            "echarts":["echarts"],
+            "vue-i18n":["vue-i18n"],
+            "pinia":["pinia"],
+            "xe-utils":["xe-utils"]
           },
           plugins: [dynamicImportVars()],
         },

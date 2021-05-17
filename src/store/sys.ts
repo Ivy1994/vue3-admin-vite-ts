@@ -5,6 +5,7 @@ import { baseRoutes } from "@router/baseRoute";
 
 const tags: AppRouteRecordRawT[] = []; /* 动态增加的tags */
 const fixedTags: AppRouteRecordRawT[] = []; /* 固定tags */
+const keepRoutes: string[] = [];
 export const useSysStore = defineStore({
   id: "sys",
   state() {
@@ -13,6 +14,7 @@ export const useSysStore = defineStore({
       tags,
       fixedTags,
       acitveName: "",
+      keepRoutes,
     };
   },
   actions: {
@@ -32,10 +34,19 @@ export const useSysStore = defineStore({
       const isRoot: boolean = ["404", "403", "login"].includes(item.name);
       !isExist && !isExistInFixed && !isRoot ? this.tags.push(item) : "";
     },
+    addKeep(name: string) {
+      const isExt = this.keepRoutes.includes(name);
+      !isExt && this.keepRoutes.push(name);
+    },
+    removeKeep(name: string) {
+      const isExt = this.keepRoutes.indexOf(name);
+      isExt !== -1 && this.keepRoutes.splice(isExt, 1);
+    },
     removeItem(item) {
       /* 删除动态的tags */
       let index: number = this.tags.findIndex(v => v?.name === item.name);
       this.tags.splice(index, 1);
+      this.removeKeep(item.name);
       this.toRePath(index, item.name);
     },
     deletByName(name: string) {

@@ -11,7 +11,7 @@ const zUserMenu = defineComponent({
     const store = useUserStore();
     const isFull = ref(false);
     const localStore = new localStoreApi();
-    const handleClick = reactive({
+    const handleClick = {
       reload: () => {
         window.location.reload();
       },
@@ -30,7 +30,7 @@ const zUserMenu = defineComponent({
           }
         }
       },
-    });
+    };
     const { locale } = useI18n();
     const handleCommand = commad => {
       switch (commad) {
@@ -55,7 +55,7 @@ const zUserMenu = defineComponent({
           onClick={proxyClick}
         >
           <div class=" text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
-            <i id="reload" class="iconshuaxin iconfont text-xl"></i>
+            <i id="reload" class="iconshuaxin iconfont text-base"></i>
           </div>
           <div
             id="lang "
@@ -76,7 +76,7 @@ const zUserMenu = defineComponent({
               {}
               <i
                 class={
-                  "iconfont text-xl " +
+                  "iconfont text-base " +
                   (locale.value === "zh"
                     ? " iconzhongyingwen2zhongwen"
                     : " iconzhongyingwenyingwen02-01")
@@ -85,14 +85,14 @@ const zUserMenu = defineComponent({
             </el-dropdown>
           </div>
           <div class="text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
-            <i id="search" class="iconfont iconsousuo text-xl"></i>
+            <i id="search" class="iconfont iconsousuo text-base"></i>
           </div>
           <div class="text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
             <i
               id="full"
               class={
                 isFull.value
-                  ? "iconfont iconsuofangsuoxiao text-xl"
+                  ? "iconfont iconsuofangsuoxiao text-base"
                   : "text-xl iconfont iconquanping"
               }
             ></i>

@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { useSysStore } from "@store/sys";
 import { defineComponent, reactive, ref } from "@vue/runtime-core";
-import { render, Teleport, createVNode, withModifiers } from "vue";
+import { render, Teleport, createVNode, withModifiers, Transition } from "vue";
 import { useRoute, useRouter } from "vue-router";
 interface MenuItem {
   icon?: string;
@@ -10,6 +10,7 @@ interface MenuItem {
 }
 const zTagItem = defineComponent({
   name: "zTagitem",
+  components: { Transition },
   props: {
     item: {
       type: Object,
@@ -63,7 +64,7 @@ const zTagItem = defineComponent({
               <div
                 class="rigth-menu bg-white shadow-lg w-44"
                 id="right-menu"
-                style={`top:${y + 5}px;left:${x + 10}px`}
+                style={`top:${y + 5}px;left:${x + 10}px;z-index:9999`}
                 onContextmenu={e => {
                   e.preventDefault();
                   e.stopPropagation;
@@ -141,42 +142,44 @@ const zTagItem = defineComponent({
       el && document.body.removeChild(el);
     };
     return () => (
-      <div
-        onClick={handClick}
-        onContextmenu={MenuClick}
-        route={prop.item.name}
-        class={
-          " w-auto  text-sm rounded-xl align-middle  border-solid	border-2 h-8  justify-center cursor-pointer transform transition duration-200  flex hover:bg-opacity-50 hover:text-gray-900 " +
-          (route.name === prop.item.name
-            ? "bg-blue-500 text-gray-200 border-blue-300"
-            : "bg-white 	 text-black border-gray-200")
-        }
-      >
+      <transition name="fade" appear mode="out-in">
         <div
-          id="title"
+          onClick={handClick}
+          onContextmenu={MenuClick}
           route={prop.item.name}
-          class="text-center px-2 align-middle flex-1 flex items-center justify-center"
+          class={
+            " w-auto  text-base  align-middle  border-solid	border-2 h-8  justify-center cursor-pointer transform  transition-all delay-50  flex hover:bg-opacity-80 hover:text-gray-900 " +
+            (route.name === prop.item.name
+              ? "bg-blue-500 text-gray-200 border-blue-300"
+              : "bg-white 	 text-black border-gray-200")
+          }
         >
-          <span route={prop.item.name}>{prop.item.meta.title}</span>
           <div
+            id="title"
             route={prop.item.name}
-            class={
-              "w-4 pl-1 text-center align-middle flex items-center justify-center" +
-              (prop.closeAbled ? " hidden" : "") +
-              (route.name === prop.item.name ? "" : " hidden")
-            }
+            class="text-center px-2 align-middle flex-1 flex items-center justify-center"
           >
-            <i
-              id="close"
+            <span route={prop.item.name}>{prop.item.meta.title}</span>
+            <div
+              route={prop.item.name}
               class={
-                (route.name === prop.item.name
-                  ? "text-gray-200 "
-                  : "text-black") + " el-icon-circle-close"
+                "w-4 pl-1 text-center align-middle flex items-center justify-center" +
+                (prop.closeAbled ? " hidden" : "") +
+                (route.name === prop.item.name ? "" : " hidden")
               }
-            ></i>
+            >
+              <i
+                id="close"
+                class={
+                  (route.name === prop.item.name
+                    ? "text-gray-200 "
+                    : "text-black") + " el-icon-circle-close"
+                }
+              ></i>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
     );
   },
 });
