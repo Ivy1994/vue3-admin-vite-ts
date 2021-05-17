@@ -3,6 +3,7 @@ import { ECOption } from "@plugins/echarts";
 import * as axios from "axios";
 import { EChartsType } from "echarts";
 import { ECharts } from "echarts/core";
+import { ElMessageBox } from "element-plus/lib/el-message-box/src/message-box.type";
 
 declare module "axios" {
   interface AxiosInstance {
@@ -16,8 +17,8 @@ interface AppGolbalConfig {
   $alert: Function;
   $confirm: Function;
   $messageBox: Function;
-  $message: Function;
-  $msgbox: Function;
+  $message: ElMessageBox;
+  $msgbox: ElMessageBox;
   $notify: Function;
   $msgbox: Function;
 }

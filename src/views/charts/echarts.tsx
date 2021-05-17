@@ -5,6 +5,7 @@ import {
   inject,
   nextTick,
   onMounted,
+  ref,
   reactive,
 } from "@vue/runtime-core";
 import { AppGolbalConfig } from "types";
@@ -13,15 +14,29 @@ const echartsDemo = defineComponent({
   name: "echartsDemo",
   setup() {
     const  {$echarts} = inject("_app") as AppGolbalConfig
+    const split = ref(null)
     let charts:any;
     const onSplitMounted = (e)=>{
+      nextTick(()=>{
+        !!charts && charts.dispose()
+      })
       setTimeout(()=>{
+      //@ts-ignore
       charts = $echarts.init(document.querySelector("#charts"))
       charts.setOption(chartsOption)
       },100)
+      console.log(split.value);
+      
+    }
+    window.onresize = ()=>{
+      /* charts自适应 */
+      !!charts && charts.resize()
+    }
+    const onResize = ()=>{
+      !!charts && charts.resize()
+
     }
     const onDrug = ()=>{
-      console.log(12312);
       charts.resize()
     }
     const chartsOption:ECOption = {
@@ -40,7 +55,7 @@ const echartsDemo = defineComponent({
     return () => (
       <div class="w-full h-full">
         {/* 自组件slots方式加载会低于父组件，可能导致获取不到dom对象，所以使用onload触发渲染完成事件 */}
-        <splitPane onDrugend={onDrug} onLoad={onSplitMounted} leftTitle="配置项" minWidth={384} maxWidth={648} v-Slots={{
+        <splitPane ref={split} sotoreage={true} onDrugend={onDrug} onResize={onResize} onLoad={onSplitMounted} leftTitle="配置项" minWidth={384} maxWidth={648} v-Slots={{
           leftContet:()=><div>1231231</div>,
           rightContent:()=><div id="charts" style="height:100%;width:100%"></div>
         }}></splitPane>

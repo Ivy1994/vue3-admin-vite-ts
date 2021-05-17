@@ -3,7 +3,7 @@ import { defineComponent } from "@vue/runtime-core";
 const emptyLayout = defineComponent({
   setup() {
     return ()=>
-    <router-view></router-view>;
+    <router-view/>;
   }
 })
 export default emptyLayout
