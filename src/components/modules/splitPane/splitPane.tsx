@@ -106,9 +106,9 @@ const splitPane = defineComponent({
     };
 
     return () => (
-      <div id="rezie-id" class="w-full h-full flex flex-row md4:flex-row">
+      <div id="rezie-id" class="w-full h-full flex flex-col md4:flex-row">
         <div
-          class={"flex flex-col right-border-shadow"}
+          class={" flex-col right-border-shadow hidden md4:flex"}
           style={`width:${
             store.get("split-width")
               ? store.get("split-width")
@@ -117,6 +117,14 @@ const splitPane = defineComponent({
               : 384
           }px`}
         >
+          <div class="w-full text-center py-4 text-xl text-gray-600 h-20 overflow-scroll">
+            {title.value}
+          </div>
+          <div class="flex-1 text-center">
+            {ctx.slots.leftContet && ctx.slots.leftContet()}
+          </div>
+        </div>
+        <div class={"flex flex-col right-border-shadow w-full md4:hidden h-60"}>
           <div class="w-full text-center py-4 text-xl text-gray-600 h-20">
             {title.value}
           </div>
@@ -126,10 +134,10 @@ const splitPane = defineComponent({
         </div>
         <div
           id="line"
-          class="w-2 cursor-move"
+          class="w-2 cursor-move hidden md4:block"
           onMousedown={hnadleMouseDown}
         ></div>
-        <div class="md4:flex-1 md4:h-full h-96">
+        <div class="flex-1 md4:h-full">
           {ctx.slots.rightContent && ctx.slots.rightContent()}
         </div>
       </div>
