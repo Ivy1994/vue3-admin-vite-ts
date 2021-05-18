@@ -53,7 +53,6 @@ const splitPane = defineComponent({
             const __wm = document.querySelector("#rezie-id");
             // 只在__wm元素变动才重新调用 __canvasWM
             if (!__wm) {
-              console.log("被处罚");
               // 避免一直触发
               mo.disconnect();
               mo = null;
@@ -108,7 +107,7 @@ const splitPane = defineComponent({
     return () => (
       <div id="rezie-id" class="w-full h-full flex flex-col md4:flex-row">
         <div
-          class={" flex-col right-border-shadow hidden md4:flex"}
+          class={" flex-col flex-shrink right-border-shadow hidden md4:flex"}
           style={`width:${
             store.get("split-width")
               ? store.get("split-width")
@@ -124,11 +123,11 @@ const splitPane = defineComponent({
             {ctx.slots.leftContet && ctx.slots.leftContet()}
           </div>
         </div>
-        <div class={"flex flex-col right-border-shadow w-full md4:hidden h-60"}>
+        <div class={"flex flex-shrink flex-col right-border-shadow w-full md4:hidden h-60"}>
           <div class="w-full text-center py-4 text-xl text-gray-600 h-20">
             {title.value}
           </div>
-          <div class="flex-1 text-center">
+          <div class="flex-1 text-center overflow-hidden">
             {ctx.slots.leftContet && ctx.slots.leftContet()}
           </div>
         </div>
@@ -137,7 +136,7 @@ const splitPane = defineComponent({
           class="w-2 cursor-move hidden md4:block"
           onMousedown={hnadleMouseDown}
         ></div>
-        <div class="flex-1 md4:h-full">
+        <div class="flex-auto md4:h-full md4:w-0">
           {ctx.slots.rightContent && ctx.slots.rightContent()}
         </div>
       </div>

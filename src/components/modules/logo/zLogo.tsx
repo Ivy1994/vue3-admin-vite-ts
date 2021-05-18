@@ -33,7 +33,46 @@ const zLogo = defineComponent({
     };
     return () => (
       <div class=" py-10 flex flex-col items-center w-full justify-center cursor-pointer overflow-hidden">
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        {
+          isShowName.value ?<el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>:        <el-popover placement="right" width={200} trigger="hover" v-Slots={
+            {
+              reference:()=><el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+            }
+          }>
+            <div class="w-full h-full flex flex-col">
+              <div class="px-4  w-full text-center truncate text-gray-800 font-sans tracking-wide  antialiased">
+              {user.username}
+              </div>
+            </div>
+            <div class="flex space-x-4 pt-4 justify-center" >
+               <div>
+                 <el-tooltip content="消息" placement="bottom" effect="light">
+                    <el-badge class="transform hover:scale-125 duration-100">
+                      <svg-icon size={18} name="message" class=""></svg-icon>
+                      </el-badge>
+                       </el-tooltip>
+                        </div>
+                          <div>
+                             <el-tooltip content="待办" placement="bottom" effect="light">
+                                <el-badge class="transform hover:scale-125 duration-100">
+                                   <svg-icon size={18} name="todo"></svg-icon>
+                                 </el-badge>
+                               </el-tooltip>
+                           </div>
+          <div>
+            <el-tooltip content="登出" placement="bottom" effect="light">
+              <el-badge class="transform hover:scale-125 duration-100">
+                <svg-icon
+                  onClick={methodHandle.logout}
+                  size={18}
+                  name="logout"
+                ></svg-icon>
+              </el-badge>
+            </el-tooltip>
+          </div>
+        </div>
+          </el-popover>
+        }
         <div
           class={
             "px-4  md:px-2 truncate text-gray-800 font-sans transition-all delay-100 tracking-wide  antialiased" +
