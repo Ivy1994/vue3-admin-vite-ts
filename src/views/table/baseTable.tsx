@@ -6,9 +6,9 @@ import {
   onMounted,
   reactive,
   ref,
-  withModifiers,
 } from "vue";
 import { VxeTableInstance } from "vxe-table";
+import _ from "loadsh"
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {

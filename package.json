@@ -20,6 +20,7 @@
     "element-plus": "^1.0.2-beta.40",
     "github-markdown-css": "^4.0.0",
     "install": "^0.13.0",
+    "loadsh": "^0.0.4",
     "marked": "^2.0.3",
     "mockjs": "^1.1.0",
     "pinia": "^2.0.0-alpha.13",
