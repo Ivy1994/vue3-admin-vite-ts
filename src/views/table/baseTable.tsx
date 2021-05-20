@@ -9,6 +9,7 @@ import {
 } from "vue";
 import { VxeTableInstance } from "vxe-table";
 import _ from "loadsh"
+import { eventBus } from "@utils/bus";
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {
@@ -22,8 +23,10 @@ const baseTable = defineComponent({
       currentPage: 1,
       total: 0,
     });
+    const i = ref(1);
     onMounted(() => {
       getTableData();
+     eventBus.publish("close",123)
     });
     const getTableData = () => {
       loading.value = true;

@@ -22,7 +22,7 @@ const layout = defineComponent({
                   const sys = useSysStore();
                   const name = baseConfig.componetTrans || "fade";
                   return (
-                    <Transition name={name} mode="out-in">
+                    <Transition name={name} mode="in-out">
                       <KeepAlive  include={sys.keepRoutes}>
                         <Component is={route.name} key={route.name}></Component>
                       </KeepAlive>

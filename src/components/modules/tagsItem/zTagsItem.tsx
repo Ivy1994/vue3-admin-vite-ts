@@ -1,5 +1,6 @@
 //@ts-nocheck
 import { useSysStore } from "@store/sys";
+import {eventBus} from "@utils/bus";
 import { defineComponent, reactive, ref } from "@vue/runtime-core";
 import { render, Teleport, createVNode, withModifiers, Transition } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -25,6 +26,11 @@ const zTagItem = defineComponent({
     const router = useRouter();
     const sysStore = useSysStore();
     const targetName = ref("");
+    const i = ref(1)
+    const bus = (e)=>{
+      console.log(e);
+    }
+    eventBus.on("close",bus)
     /* 点击close */
     const handClick = evt => {
       switch (evt.target.id) {
