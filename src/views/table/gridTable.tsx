@@ -7,21 +7,21 @@ const gridTable = defineComponent({
   },
   setup() {
     const activeName = ref("first_1");
+    const active = ref(1)
+    const changeActive = (index:number):void=>{
+       active.value=index
+    }
     return () => (
       <div>
-        <el-tabs v-model={activeName.value}>
-          {["0", "1", "2"].map(v => {
-            return (
-              <el-tab-pane label={v} name={"first_" + v}>
-                {activeName.value === "first_" + v ? (
-                  <testTree nodeKey={v}></testTree>
-                ) : (
-                  ""
-                )}
-              </el-tab-pane>
-            );
-          })}
-        </el-tabs>
+        <div class="w-full h-24  flex items-end " style="background-color:#3c00ca">
+          <span class="inline-block bander-item"></span>
+          <span onClick={changeActive.bind(this,1)} class={"inline-block w-1/6 h-1/2  bander-item"+(active.value===1?" is-active":"")}>子项</span>
+          <span onClick={changeActive.bind(this,2)}  class={"inline-block w-1/6 h-1/2  bander-item"+(active.value===2?" is-active":"")}>子项</span>
+          <span onClick={changeActive.bind(this,3)} class={"inline-block w-1/6 h-1/2  bander-item"+(active.value===3?" is-active":"")}>子项</span>
+          <span onClick={changeActive.bind(this,4)} class={"inline-block w-1/6 h-1/2  bander-item"+(active.value===4?" is-active":"")} >子项</span>
+          <span onClick={changeActive.bind(this,5)} class={"inline-block w-1/6 h-1/2  bander-item"+(active.value===5?" is-active":"")}>子项</span>
+          <span class="inline-block bander-item "></span>
+        </div>
       </div>
     );
   },

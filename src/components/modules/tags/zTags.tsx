@@ -5,12 +5,18 @@ import {
   watch,
   watchEffect,
 } from "@vue/runtime-core";
+import {eventBus} from "@utils/bus";
+
 import { useRoute } from "vue-router";
 
 const zTags = defineComponent({
   name: "zTags",
   setup() {
     const sysStore = useSysStore();
+    const bus = (e)=>{
+      console.log(e);
+    }
+    eventBus.subscribe("close",bus)
     return () => (
       <div id="tags" class="w-full flex justify-center px-2 py-1 shadow">
         <div class="w-full overflow-y-scroll flex">
