@@ -3,12 +3,9 @@ import { useSysStore } from "@store/sys";
 import { useUserStore } from "@store/user";
 import {
   defineComponent,
-  readonly,
-  toRefs,
   computed,
   ref,
   watch,
-  nextTick,
 } from "vue";
 
 const zLogo = defineComponent({

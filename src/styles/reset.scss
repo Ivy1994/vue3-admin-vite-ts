@@ -42,6 +42,10 @@ body {
     .markdown-body{
       @include dark;
     }
+    .table-header {
+      @apply bg-gray-700;
+      color: #fff;
+    }
   };
   @include scroll-bar;
   transition: all;

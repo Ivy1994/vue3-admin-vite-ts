@@ -45,22 +45,39 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-.slider-bar {
-  &.el-menu{
-    border-right: 0 !important;
-  }
-  .el-submenu {
-    &.is-opened {
-      outline: 0 !important;
-      @apply bg-blue-100;
+html {
+  body {
+    &[theme="dark"] {
+        .el-submenu {
+          &.is-opened {
+            outline: 0 !important;
+            @apply bg-blue-100;
+          }
+          .el-submenu__title:focus,
+          .el-submenu__title:hover {
+            outline: 0 !important;
+            @apply bg-blue-300;
+          }
+        }
+      }
+    } 
+    .slider-bar {
+      &.el-menu{
+        border-right: 0 !important;
+      }
+      .el-submenu {
+        &.is-opened {
+          outline: 0 !important;
+          @apply bg-blue-100;
+        }
+        .el-submenu__title:focus,
+        .el-submenu__title:hover {
+          outline: 0 !important;
+          @apply bg-blue-100;
+        }
+      }
     }
-    .el-submenu__title:focus,
-    .el-submenu__title:hover {
-      outline: 0 !important;
-      @apply bg-blue-100;
-    }
   }
-}
 /*v-enter 是进入之前，元素的起始状态*/
 /*v-leave-to 离开之后动画的终止状态*/
 .v-enter,
