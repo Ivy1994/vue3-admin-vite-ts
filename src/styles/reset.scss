@@ -1,9 +1,51 @@
 @import "vxe-table/styles/variable.scss";
 
 $vxe-primary-color: #34d399;
+$dark-theme-color: #fff;
+$dark-theme-bg:#000;
+@mixin dark {
+  background-color: $dark-theme-bg;
+  color: $dark-theme-color;
+}
+@mixin scroll-bar {
+  /**
+ * 全局滚动条样式
+*/
+// 滚动条背景，宽高
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+}
 
+// 滚动条轨道
+::-webkit-scrollbar-track {
+  border: none;
+  background-color:transparent;
+}
+
+// 滚动条滑块
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(144, 147, 153, 0.6);
+  cursor: pointer;
+}
+}
 html,
 body {
+  &[theme="dark"]{
+    @include dark;
+    @include scroll-bar;
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(144, 147, 153, 0.3);
+    }
+    .markdown-body{
+      @include dark;
+    }
+  };
+  @include scroll-bar;
+  transition: all;
+  transition-duration: 150ms;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -67,26 +109,4 @@ body {
   }
 }
 
-/**
- * 全局滚动条样式
-*/
-// 滚动条背景，宽高
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: transparent;
-}
-
-// 滚动条轨道
-::-webkit-scrollbar-track {
-  border: none;
-  background-color: #fff;
-}
-
-// 滚动条滑块
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(144, 147, 153, 0.3);
-  cursor: pointer;
-}
 @import "vxe-table/styles/modules.scss";

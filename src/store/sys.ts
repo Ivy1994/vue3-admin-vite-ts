@@ -1,10 +1,13 @@
 import { defineStore } from "pinia";
 import { AppRouteRecordRawT } from "@router/types";
 import { router } from "@router/index";
-import { baseRoutes } from "@router/baseRoute";
-
+import { changeTheme } from "@utils/theme";
 const tags: AppRouteRecordRawT[] = []; /* 动态增加的tags */
 const fixedTags: AppRouteRecordRawT[] = []; /* 固定tags */
+export enum Theme{
+  dark="dark",
+  light="light"
+}
 const keepRoutes: string[] = [];
 export const useSysStore = defineStore({
   id: "sys",
@@ -15,6 +18,7 @@ export const useSysStore = defineStore({
       fixedTags,
       acitveName: "",
       keepRoutes,
+      theme:""
     };
   },
   actions: {
@@ -33,6 +37,9 @@ export const useSysStore = defineStore({
       );
       const isRoot: boolean = ["404", "403", "login"].includes(item.name);
       !isExist && !isExistInFixed && !isRoot ? this.tags.push(item) : "";
+    },
+    changeThemeStore(name?:string){
+      this.theme = name || "light"
     },
     addKeep(name: string) {
       const isExt = this.keepRoutes.includes(name);

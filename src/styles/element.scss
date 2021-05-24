@@ -1,22 +1,4 @@
-.login-input {
-  .el-input__inner {
-    opacity: 0.6;
-    line-height: 43px;
-    height: 43px;
-    transition: 0.5s;
-    font-size: 16px;
-    font-family: monospace;
-    padding-left: 40px;
-    &:focus {
-      border: 1px solid;
-      border-color: #fecaca;
-    }
-  }
-  .el-input__prefix {
-    font-size: 25px;
-    top: 4px;
-  }
-}
+
 html {
   body {
     /* loading文本样式 */
@@ -26,6 +8,25 @@ html {
       -moz-animation: blink 2s linear infinite;
       -ms-animation: blink 2s linear infinite;
       -o-animation: blink 2s linear infinite;
+    }
+    .login-input {
+      .el-input__inner {
+        opacity: 0.6;
+        line-height: 43px;
+        height: 43px;
+        transition: 0.5s;
+        font-size: 16px;
+        font-family: monospace;
+        padding-left: 40px;
+        &:focus {
+          border: 1px solid;
+          border-color: #fecaca;
+        }
+      }
+      .el-input__prefix {
+        font-size: 25px;
+        top: 4px;
+      }
     }
     .el-loading-parent--relative {
       position: relative !important;

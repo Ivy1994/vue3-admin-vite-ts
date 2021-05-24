@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { useSysStore } from "@store/sys";
-import { defineComponent, reactive, ref } from "@vue/runtime-core";
+import { computed, defineComponent, reactive, ref } from "@vue/runtime-core";
 import { render, Teleport, createVNode, withModifiers, Transition } from "vue";
 import { useRoute, useRouter } from "vue-router";
 interface MenuItem {
@@ -25,6 +25,9 @@ const zTagItem = defineComponent({
     const router = useRouter();
     const sysStore = useSysStore();
     const targetName = ref("");
+    const isDark = computed(()=>{
+      return sysStore.theme ==="dark"
+    })
     /* 点击close */
     const handClick = evt => {
       switch (evt.target.id) {

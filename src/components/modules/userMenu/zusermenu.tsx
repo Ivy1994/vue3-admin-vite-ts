@@ -1,6 +1,8 @@
 import { changeLocaleEle } from "@plugins/config/i18n.config";
 import { localStoreApi } from "@store/localStore/local";
+import { useSysStore } from "@store/sys";
 import { useUserStore } from "@store/user";
+import { changeTheme } from "@utils/theme";
 import { defineComponent, nextTick, reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
@@ -9,6 +11,7 @@ const zUserMenu = defineComponent({
   name: "zUsermenu",
   setup() {
     const store = useUserStore();
+    const sys = useSysStore()
     const isFull = ref(false);
     const localStore = new localStoreApi();
     const handleClick = {
@@ -30,15 +33,15 @@ const zUserMenu = defineComponent({
           }
         }
       },
-    };
-    const { locale } = useI18n();
-    const handleCommand = commad => {
-      switch (commad) {
-        case "c":
-          store.logout();
-          break;
+      theme:()=>{
+        const sysTheme = sys.theme ==="dark"?"light":"dark"
+        sys.$patch({
+          theme:sysTheme
+        })
+        changeTheme(sysTheme)
       }
     };
+    const { locale } = useI18n();
     const handChangeLang = command => {
       locale.value = command;
       localStore.set("la", command);
@@ -54,12 +57,12 @@ const zUserMenu = defineComponent({
           class=" flex-1 hidden sm:flex justify-end space-x-10 cursor-pointer"
           onClick={proxyClick}
         >
-          <div class=" text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
+          <div class="  w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
             <i id="reload" class="iconshuaxin iconfont text-base"></i>
           </div>
           <div
             id="lang "
-            class="text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400"
+            class=" w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400"
           >
             <el-dropdown
               size="mini"
@@ -84,10 +87,10 @@ const zUserMenu = defineComponent({
               ></i>
             </el-dropdown>
           </div>
-          <div class="text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
+          <div class=" w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
             <i id="search" class="iconfont iconsousuo text-base"></i>
           </div>
-          <div class="text-gray-700 w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
+          <div class="w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
             <i
               id="full"
               class={
@@ -97,29 +100,10 @@ const zUserMenu = defineComponent({
               }
             ></i>
           </div>
-        </div>
-        {/*  <div class="flex items-center w-24 pr-10 text-center">
-          <el-dropdown
-            onCommand={handleCommand}
-            size="mini"
-            class="outline-none"
-            vSlots={{
-              dropdown: () => {
-                return (
-                  <el-dropdown-menu>
-                    <el-dropdown-item command="a">个人中心</el-dropdown-item>
-                    <el-dropdown-item command="b">我的待办</el-dropdown-item>
-                    <el-dropdown-item command="c">注销登录</el-dropdown-item>
-                  </el-dropdown-menu>
-                );
-              },
-            }}
-          >
-            <div class="whitespace-normal truncate align-middle word-inline sm:block">
-              个人中心
+          <div id="theme" class="w-auto text-center text-xs transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
+            {sys.theme =="dark"?"夜间模式":"日间模式"}
             </div>
-          </el-dropdown>
-        </div> */}
+        </div>
       </div>
     );
   },

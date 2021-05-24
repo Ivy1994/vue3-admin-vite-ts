@@ -3,7 +3,8 @@ import { useSysStore } from "@store/sys";
 import { computed, defineComponent, TransitionGroup } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
-
+import { changeTheme } from "@utils/theme";
+import { isDateSame } from "xe-utils";
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },
@@ -14,13 +15,17 @@ const zSlider = defineComponent({
       return sysStore.collapse;
     });
     const route = useRoute();
-
+    // setTimeout(()=>{
+    //   changeTheme("dark")
+    // },2000)
     const router = useRouter();
     const activePAth = computed(() => {
       return route.name;
     });
+    const isDark = computed(()=>{
+      return sysStore.theme === "dark"
+    })
     const routeStore = useRouteStore();
-
     const handleSelect = name => {
       router.push({ name });
     };
@@ -73,10 +78,10 @@ const zSlider = defineComponent({
       <>
         <div
           class={
-            "h-screen max-w-xl hidden mmd:block delay-300 shadow-2xl	 ease-in-out transition-all" +
+            "h-screen max-w-xl hidden mmd:block delay-300	 ease-in-out transition-all" +
             (isCollapse.value ? " w-20" : "  w-40 md:w-64")
           }
-          style="box-shadow:5px 0 10px #ddd"
+          style={isDark.value?"border-right:1px solid #999":"box-shadow:5px 0 10px #999"}
         >
           <z-logo></z-logo>
           <el-menu
@@ -84,9 +89,11 @@ const zSlider = defineComponent({
             default-active={activePAth.value}
             onSelect={handleSelect}
             menu-trigger="click"
+            background-color={isDark.value?"#000":"#fff"}
+            text-color={isDark.value?"#fff":"#303133"}
             active-text-color="#F87171"
             collapse={isCollapse.value}
-            class="w-full h-auto slider-bar"
+            class="w-full slider-bar"
             unique-opened={true}
           >
             {slot(routeStore.asyncRouts)}
@@ -109,6 +116,8 @@ const zSlider = defineComponent({
                 menu-trigger="click"
                 active-text-color="#F87171"
                 class="w-full h-auto slider-bar"
+                background-color={isDark.value?"#000":"#fff"}
+                text-color={isDark.value?"#fff":"#303133"}
               >
                 {slot(routeStore.asyncRouts)}
               </el-menu>

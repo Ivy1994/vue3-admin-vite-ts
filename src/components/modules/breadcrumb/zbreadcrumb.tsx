@@ -9,6 +9,9 @@ const zBreadcrumb = defineComponent({
     const isExp = computed(() => {
       return useStore.collapse;
     });
+    const isDark = computed(() => {
+      return useStore.theme === "dark";
+    });
     const route = useRoute();
     const exp = () => {
       /* 改变全局状态 */
@@ -21,17 +24,17 @@ const zBreadcrumb = defineComponent({
         <i
           onClick={exp}
           class={
-            "el-icon-s-unfold font-light text-gray-600 text-xl cursor-pointer transform hover:scale-110 duration-500" +
-            (isExp.value ? " rotate-180" : "")
+            "el-icon-s-unfold font-light  text-xl cursor-pointer transform hover:scale-110 duration-500" +
+            (isExp.value ? " rotate-180" : "")+(isDark.value?" text-gray-100":" text-gray-600")
           }
         ></i>
         <el-breadcrumb
           separator-class="el-icon-arrow-right text-red-300 "
-          class="px-4 w-max text-base"
+          class={"px-4 w-max text-base "+(isDark.value?" text-gray-100":" text-gray-600")}
         >
           {route.matched.map(v => {
             return (
-              <el-breadcrumb-item to={v.path}>
+              <el-breadcrumb-item class={isDark.value?" text-gray-100":" text-gray-600"} to={v.path}>
                 {v.meta.title}
               </el-breadcrumb-item>
             );

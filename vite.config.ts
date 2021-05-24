@@ -51,6 +51,8 @@ export default async ({
         },
       },
       chunkSizeWarningLimit: 1300,
+      minify:"terser",
+      cssCodeSplit:true,
     },
     optimizeDeps: {
       include: [
