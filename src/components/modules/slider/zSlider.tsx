@@ -90,7 +90,7 @@ const zSlider = defineComponent({
             onSelect={handleSelect}
             menu-trigger="click"
             background-color={isDark.value?"#000":"#fff"}
-            text-color={isDark.value?"#fff":"#303133"}
+            text-color={isDark.value?"#aaa":"#303133"}
             active-text-color="#F87171"
             collapse={isCollapse.value}
             class="w-full slider-bar"
@@ -117,7 +117,8 @@ const zSlider = defineComponent({
                 active-text-color="#F87171"
                 class="w-full h-auto slider-bar"
                 background-color={isDark.value?"#000":"#fff"}
-                text-color={isDark.value?"#fff":"#303133"}
+                text-color={isDark.value?"#aaa":"#303133"}
+                unique-opened={true}
               >
                 {slot(routeStore.asyncRouts)}
               </el-menu>

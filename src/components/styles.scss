@@ -1,3 +1,4 @@
+@import "../styles//reset.scss";
 .z-button {
   @apply inline-block transition-all outline-none bg-blue-600 focus:border-blue-300  px-4 py-2 bg-blue-600	focus:border-blue-300 rounded-lg text-white m-1 duration-500  text-center truncate max-w-xs;
   &:hover,
@@ -48,6 +49,12 @@
 html {
   body {
     &[theme="dark"] {
+      .right-border-shadow {
+        border: 1px solid #ddd;
+        background-color: transparent;
+        box-shadow: none;
+        // box-shadow: 2px 0px 5px #aaa;
+      }
         .el-submenu {
           &.is-opened {
             outline: 0 !important;
@@ -60,7 +67,14 @@ html {
           }
         }
       }
+      .el-drawer{
+        background-color: $dark-theme-bg;
+      }
     } 
+    .right-border-shadow {
+      border-right: 1px solid #ddd;
+      box-shadow: 2px 0px 10px #ddd;
+    }
     .slider-bar {
       &.el-menu{
         border-right: 0 !important;
@@ -142,8 +156,3 @@ html {
 .top-leave-active {
   transition: all 0.4s;
 } */
-
-.right-border-shadow {
-  border-right: 1px solid #ddd;
-  box-shadow: 2px 0px 10px #ddd;
-}

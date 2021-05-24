@@ -1,7 +1,7 @@
 @import "vxe-table/styles/variable.scss";
 
 $vxe-primary-color: #34d399;
-$dark-theme-color: #fff;
+$dark-theme-color: #aaa;
 $dark-theme-bg:#000;
 @mixin dark {
   background-color: $dark-theme-bg;
@@ -42,13 +42,16 @@ body {
     .markdown-body{
       @include dark;
     }
+    .login-wapper{
+      background: $dark-theme-bg !important
+    }
     .table-header {
       @apply bg-gray-700;
-      color: #fff;
+      color: $dark-theme-color;
     }
     .el-breadcrumb__inner{
       &.is-link {
-          color: #fff;
+          color: $dark-theme-color;
       }
     }
   };

@@ -76,7 +76,7 @@ const zLogo = defineComponent({
         <div
           class={
             "px-4  md:px-2 truncate  font-sans transition-all delay-100 tracking-wide  antialiased" +
-            (isShowName.value ? "" : " hidden")+(isDark.value?" text-white":" text-gray-800")
+            (isShowName.value ? "" : " hidden")+(isDark.value?" text-gray-300":" text-gray-800")
           }
         >
           {user.username}

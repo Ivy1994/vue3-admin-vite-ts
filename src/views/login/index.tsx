@@ -1,6 +1,5 @@
 import { UserLoginForm } from "@apis/models/user";
 import { defineComponent, reactive, ref } from "vue";
-import { ElFormItemContext } from "element-plus/lib/el-form";
 import { useUserStore } from "@store/user";
 import { useRouter } from "vue-router";
 const login = defineComponent({
