@@ -37,8 +37,8 @@
 - [x] vite 打包配置
 - [ ] cdn
 - [x] 水印
-- [ ] 主题切换
+- [x] 主题切换
 - [x] plugin 模块化
 - [x] 按需引入
-- [ ] 切割面板组件
-- [ ] echarts、antv封装
+- [x] 切割面板组件
+- [x] echarts、antv封装

@@ -46,6 +46,11 @@ body {
       @apply bg-gray-700;
       color: #fff;
     }
+    .el-breadcrumb__inner{
+      &.is-link {
+          color: #fff;
+      }
+    }
   };
   @include scroll-bar;
   transition: all;
