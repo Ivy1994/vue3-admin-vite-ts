@@ -43,7 +43,7 @@ const zLogo = defineComponent({
             }
           }>
             <div class="w-full h-full flex flex-col">
-              <div class={"px-4  w-full text-center truncate font-sans tracking-wide  antialiased"+(!isDark.value?" text-white":" text-gray-800")}>
+              <div class={"px-4  w-full text-center truncate font-sans tracking-wide  antialiased"+(isDark.value?" text-gray-600":" text-gray-800")}>
               {user.username}
               </div>
             </div>
