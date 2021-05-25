@@ -100,8 +100,18 @@ const zUserMenu = defineComponent({
               }
             ></i>
           </div>
-          <div id="theme" class="w-auto text-center text-xs transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
-            {sys.theme =="dark"?"夜间模式":"日间模式"}
+          <div class="w-auto text-center text-xs transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
+            {sys.theme =="dark"? <svg-icon
+                      size={20}
+                      onClick={handleClick.theme}
+                      class="inline-block w-auto px-2"
+                      name="light"
+                    ></svg-icon>: <svg-icon
+                    size={20}
+                    onClick={handleClick.theme}
+                    class="inline-block w-auto px-2"
+                    name="dark"
+                  ></svg-icon>}
             </div>
         </div>
       </div>

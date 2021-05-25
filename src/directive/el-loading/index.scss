@@ -33,12 +33,19 @@
       background-color: transparent;
     }
   }
-  .loading-wapper-c {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    z-index: 999;
-    top: 0;
-    overflow: hidden;
+  html,body {
+    &[theme="dark"] {
+      .loading-wapper-c {
+        background: rgba(0, 0, 0, 0.6) !important;
+      }
+    }
+    .loading-wapper-c {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 999;
+      top: 0;
+      overflow: hidden;
+    }
   }

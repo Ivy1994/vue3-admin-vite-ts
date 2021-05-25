@@ -3,8 +3,6 @@ import { useSysStore } from "@store/sys";
 import { computed, defineComponent, TransitionGroup } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
-import { changeTheme } from "@utils/theme";
-import { isDateSame } from "xe-utils";
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },

@@ -1,21 +1,16 @@
 import tableModel from "@apis/table/table";
-import { AppGolbalConfig } from "types";
 import {
   defineComponent,
-  inject,
   onMounted,
   reactive,
   ref,
 } from "vue";
 import { VxeTableInstance } from "vxe-table";
 import _ from "loadsh"
-import { eventBus } from "@utils/bus";
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {
     const baseTableRef = ref({} as VxeTableInstance);
-    const _app = inject("_app") as AppGolbalConfig;
-    const { $echarts } = _app;
     const tableData = ref([]);
     const loading = ref(false);
     const pageConf = reactive({
@@ -23,12 +18,11 @@ const baseTable = defineComponent({
       currentPage: 1,
       total: 0,
     });
-    const i = ref(1);
     onMounted(() => {
       getTableData();
-     eventBus.publish("close",123)
     });
     const getTableData = () => {
+      baseTableRef.value.clearScroll()
       loading.value = true;
       tableModel
         .base({
@@ -69,9 +63,11 @@ const baseTable = defineComponent({
         <vxe-table
           v-loading={loading.value}
           header-row-class-name="table-header"
+          cell-class-name="table-cell"
           border="full"
           align="center"
           height="400px"
+          round
           autoResize={true}
           ref={baseTableRef}
           data={tableData.value}
@@ -160,6 +156,7 @@ const baseTable = defineComponent({
           ]}
           onPageChange={searchMethod}
           total={pageConf.total}
+          class-name="pager-style"
           layouts={[
             "PrevJump",
             "PrevPage",

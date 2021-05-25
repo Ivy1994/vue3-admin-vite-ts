@@ -34,6 +34,12 @@ html {
     .el-loading-parent--hidden {
       overflow: hidden !important;
     }
+    /* dark模式 */
+    &[theme="dark"] {
+      .el-loading-mask{
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+    }
     .el-loading-mask {
       position: absolute;
       z-index: 2000;

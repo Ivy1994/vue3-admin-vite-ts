@@ -1,8 +1,7 @@
 @import "vxe-table/styles/variable.scss";
-
 $vxe-primary-color: #34d399;
 $dark-theme-color: #aaa;
-$dark-theme-bg:#000;
+$dark-theme-bg: #000;
 @mixin dark {
   background-color: $dark-theme-bg;
   color: $dark-theme-color;
@@ -11,50 +10,64 @@ $dark-theme-bg:#000;
   /**
  * 全局滚动条样式
 */
-// 滚动条背景，宽高
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: transparent;
-}
+  // 滚动条背景，宽高
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+  }
 
-// 滚动条轨道
-::-webkit-scrollbar-track {
-  border: none;
-  background-color:transparent;
-}
-
-// 滚动条滑块
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(144, 147, 153, 0.6);
-  cursor: pointer;
-}
+  // 滚动条轨道
+  ::-webkit-scrollbar-track {
+    border: none;
+    background-color: transparent;
+  }
+  // 滚动条滑块
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(144, 147, 153, 0.6);
+    cursor: pointer;
+  }
 }
 html,
 body {
-  &[theme="dark"]{
+  &[theme="dark"] {
     @include dark;
     @include scroll-bar;
     ::-webkit-scrollbar-thumb {
       background-color: rgba(144, 147, 153, 0.3);
     }
-    .markdown-body{
+    .markdown-body {
       @include dark;
     }
-    .login-wapper{
-      background: $dark-theme-bg !important
+    /* table-cell */
+    .table-cell {
+     @include dark;
+    }
+    .login-wapper {
+      background: $dark-theme-bg !important;
     }
     .table-header {
       @apply bg-gray-700;
       color: $dark-theme-color;
     }
-    .el-breadcrumb__inner{
-      &.is-link {
-          color: $dark-theme-color;
+    .pager-style{
+      background-color: transparent !important;
+      border: none !important;
+      .vxe-pager--num-btn,.vxe-pager--jump-prev,.vxe-pager--prev-btn,.vxe-pager--jump-next,.vxe-pager--next-btn,.vxe-pager--jump-next{
+        @apply bg-gray-700;
+        @apply border-none;
       }
     }
-  };
+    .el-breadcrumb__inner {
+      &.is-link {
+        color: $dark-theme-color;
+      }
+    }
+  }
+  .vxe-table,.vxe-table--body-wrapper,.vxe-table--body,.vxe-table--main-wrapper,.vxe-table--render-wrapper{
+      @include scroll-bar;
+  }
   @include scroll-bar;
   transition: all;
   transition-duration: 150ms;
@@ -67,6 +80,16 @@ body {
   font-weight: 400;
   div {
     box-sizing: border-box;
+  }
+  .pager-style{
+    background-color: transparent !important;
+    border: none !important;
+  }
+  .table-cell {
+    background-image: linear-gradient(#e8eaec, #e8eaec), linear-gradient(#e8eaec, #e8eaec);
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 100% 1px;
+    background-position: right top, right bottom;
   }
   .table-header {
     background-color: #34d399;
@@ -81,23 +104,24 @@ body {
   .login-wapper {
     background-image: url("../assets/img/login_bg.png");
   }
-  .bander-item{
+  .bander-item {
     background-color: #3c00ca;
     border-radius: 16px;
     z-index: 9;
     text-align: center;
     line-height: 40px;
-    color:#fff;
-/*     transition: ease-in-out;
+    color: #fff;
+    /*     transition: ease-in-out;
     transition-duration: 200;
     transition-delay: 50ms; */
     cursor: pointer;
     &.is-active {
       background-color: #fff;
-      color:#3c00ca;
+      color: #3c00ca;
       position: relative;
       z-index: 8;
-      &::before,&::after{
+      &::before,
+      &::after {
         position: absolute;
         content: "";
         bottom: 0px;
@@ -105,14 +129,15 @@ body {
         height: 20px;
         background-color: #fff;
       }
-      &::before{
+      &::before {
         left: -13px;
       }
-      &::after{
+      &::after {
         right: -13px;
       }
     }
-    &:first-child,&:last-child{
+    &:first-child,
+    &:last-child {
       border-radius: 20px;
       height: 31px;
       width: 30px;
