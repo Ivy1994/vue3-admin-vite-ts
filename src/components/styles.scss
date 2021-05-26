@@ -33,7 +33,7 @@
 .height-slider {
   height: calc(100vh - 42px);
 }
-.dark-pop{
+.dark-pop {
   background-color: #ddd !important;
 }
 .main-content {
@@ -55,29 +55,8 @@ html {
         box-shadow: none;
         // box-shadow: 2px 0px 5px #aaa;
       }
-        .el-submenu {
-          &.is-opened {
-            outline: 0 !important;
-            @apply bg-blue-100;
-          }
-          .el-submenu__title:focus,
-          .el-submenu__title:hover {
-            outline: 0 !important;
-            @apply bg-blue-300;
-          }
-        }
-      }
-      .el-drawer{
+      .el-drawer {
         background-color: $dark-theme-bg;
-      }
-    } 
-    .right-border-shadow {
-      border-right: 1px solid #ddd;
-      box-shadow: 2px 0px 10px #ddd;
-    }
-    .slider-bar {
-      &.el-menu{
-        border-right: 0 !important;
       }
       .el-submenu {
         &.is-opened {
@@ -87,11 +66,35 @@ html {
         .el-submenu__title:focus,
         .el-submenu__title:hover {
           outline: 0 !important;
-          @apply bg-blue-100;
+          @apply bg-blue-300;
         }
       }
     }
+    .el-drawer {
+      background-color: #fff;
+    }
   }
+  .right-border-shadow {
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0px 10px #ddd;
+  }
+  .slider-bar {
+    &.el-menu {
+      border-right: 0 !important;
+    }
+    .el-submenu {
+      &.is-opened {
+        outline: 0 !important;
+        @apply bg-blue-100;
+      }
+      .el-submenu__title:focus,
+      .el-submenu__title:hover {
+        outline: 0 !important;
+        @apply bg-blue-100;
+      }
+    }
+  }
+}
 /*v-enter 是进入之前，元素的起始状态*/
 /*v-leave-to 离开之后动画的终止状态*/
 .v-enter,

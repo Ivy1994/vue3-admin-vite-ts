@@ -11,7 +11,7 @@ const zUserMenu = defineComponent({
   name: "zUsermenu",
   setup() {
     const store = useUserStore();
-    const sys = useSysStore()
+    const sys = useSysStore();
     const isFull = ref(false);
     const localStore = new localStoreApi();
     const handleClick = {
@@ -33,13 +33,13 @@ const zUserMenu = defineComponent({
           }
         }
       },
-      theme:()=>{
-        const sysTheme = sys.theme ==="dark"?"light":"dark"
+      theme: () => {
+        const sysTheme = sys.theme === "dark" ? "light" : "dark";
         sys.$patch({
-          theme:sysTheme
-        })
-        changeTheme(sysTheme)
-      }
+          theme: sysTheme,
+        });
+        changeTheme(sysTheme);
+      },
     };
     const { locale } = useI18n();
     const handChangeLang = command => {
@@ -101,18 +101,22 @@ const zUserMenu = defineComponent({
             ></i>
           </div>
           <div class="w-auto text-center text-xs transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
-            {sys.theme =="dark"? <svg-icon
-                      size={20}
-                      onClick={handleClick.theme}
-                      class="inline-block w-auto px-2"
-                      name="light"
-                    ></svg-icon>: <svg-icon
-                    size={20}
-                    onClick={handleClick.theme}
-                    class="inline-block w-auto px-2"
-                    name="dark"
-                  ></svg-icon>}
-            </div>
+            {sys.theme == "dark" ? (
+              <svg-icon
+                size={20}
+                onClick={handleClick.theme}
+                class="inline-block w-auto px-2"
+                name="light"
+              ></svg-icon>
+            ) : (
+              <svg-icon
+                size={20}
+                onClick={handleClick.theme}
+                class="inline-block w-auto px-2"
+                name="dark"
+              ></svg-icon>
+            )}
+          </div>
         </div>
       </div>
     );

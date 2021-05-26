@@ -3,6 +3,7 @@ import { useSysStore } from "@store/sys";
 import { computed, defineComponent, TransitionGroup } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
+import { changeTheme } from "@utils/theme";
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },
@@ -12,6 +13,13 @@ const zSlider = defineComponent({
     const isCollapse = computed(() => {
       return sysStore.collapse;
     });
+    const mbTheme = () => {
+      const sysTheme = sysStore.theme === "dark" ? "light" : "dark";
+      sysStore.$patch({
+        theme: sysTheme,
+      });
+      changeTheme(sysTheme);
+    };
     const route = useRoute();
     // setTimeout(()=>{
     //   changeTheme("dark")
@@ -20,9 +28,9 @@ const zSlider = defineComponent({
     const activePAth = computed(() => {
       return route.name;
     });
-    const isDark = computed(()=>{
-      return sysStore.theme === "dark"
-    })
+    const isDark = computed(() => {
+      return sysStore.theme === "dark";
+    });
     const routeStore = useRouteStore();
     const handleSelect = name => {
       router.push({ name });
@@ -79,7 +87,11 @@ const zSlider = defineComponent({
             "h-screen max-w-xl hidden mmd:block delay-300	 ease-in-out transition-all" +
             (isCollapse.value ? " w-20" : "  w-40 md:w-64")
           }
-          style={isDark.value?"border-right:1px solid #999":"box-shadow:5px 0 10px #999"}
+          style={
+            isDark.value
+              ? "border-right:1px solid #999"
+              : "box-shadow:5px 0 10px #999"
+          }
         >
           <z-logo></z-logo>
           <el-menu
@@ -87,8 +99,8 @@ const zSlider = defineComponent({
             default-active={activePAth.value}
             onSelect={handleSelect}
             menu-trigger="click"
-            background-color={isDark.value?"#000":"#fff"}
-            text-color={isDark.value?"#aaa":"#303133"}
+            background-color={isDark.value ? "#000" : "#fff"}
+            text-color={isDark.value ? "#aaa" : "#303133"}
             active-text-color="#F87171"
             collapse={isCollapse.value}
             class="w-full slider-bar"
@@ -114,12 +126,29 @@ const zSlider = defineComponent({
                 menu-trigger="click"
                 active-text-color="#F87171"
                 class="w-full h-auto slider-bar"
-                background-color={isDark.value?"#000":"#fff"}
-                text-color={isDark.value?"#aaa":"#303133"}
+                background-color={isDark.value ? "#000" : "#fff"}
+                text-color={isDark.value ? "#aaa" : "#303133"}
                 unique-opened={true}
               >
                 {slot(routeStore.asyncRouts)}
               </el-menu>
+              <div class="w-full h-20 absolute bottom-3 text-center">
+                {isDark.value ? (
+                  <svg-icon
+                    size={20}
+                    onClick={mbTheme}
+                    class="inline-block w-auto px-2"
+                    name="light"
+                  ></svg-icon>
+                ) : (
+                  <svg-icon
+                    size={20}
+                    onClick={mbTheme}
+                    class="inline-block w-auto px-2"
+                    name="dark"
+                  ></svg-icon>
+                )}
+              </div>
             </div>
           </el-drawer>
         </div>
