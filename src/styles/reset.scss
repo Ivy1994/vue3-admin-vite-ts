@@ -42,7 +42,7 @@ body {
     }
     /* table-cell */
     .table-cell {
-     @include dark;
+      @include dark;
     }
     .login-wapper {
       background: $dark-theme-bg !important;
@@ -51,10 +51,15 @@ body {
       @apply bg-gray-700;
       color: $dark-theme-color;
     }
-    .pager-style{
+    .pager-style {
       background-color: transparent !important;
       border: none !important;
-      .vxe-pager--num-btn,.vxe-pager--jump-prev,.vxe-pager--prev-btn,.vxe-pager--jump-next,.vxe-pager--next-btn,.vxe-pager--jump-next{
+      .vxe-pager--num-btn,
+      .vxe-pager--jump-prev,
+      .vxe-pager--prev-btn,
+      .vxe-pager--jump-next,
+      .vxe-pager--next-btn,
+      .vxe-pager--jump-next {
         @apply bg-gray-700;
         @apply border-none;
       }
@@ -65,8 +70,12 @@ body {
       }
     }
   }
-  .vxe-table,.vxe-table--body-wrapper,.vxe-table--body,.vxe-table--main-wrapper,.vxe-table--render-wrapper{
-      @include scroll-bar;
+  .vxe-table,
+  .vxe-table--body-wrapper,
+  .vxe-table--body,
+  .vxe-table--main-wrapper,
+  .vxe-table--render-wrapper {
+    @include scroll-bar;
   }
   @include scroll-bar;
   transition: all;
@@ -81,12 +90,13 @@ body {
   div {
     box-sizing: border-box;
   }
-  .pager-style{
+  .pager-style {
     background-color: transparent !important;
     border: none !important;
   }
   .table-cell {
-    background-image: linear-gradient(#e8eaec, #e8eaec), linear-gradient(#e8eaec, #e8eaec);
+    background-image: linear-gradient(#e8eaec, #e8eaec),
+      linear-gradient(#e8eaec, #e8eaec);
     background-repeat: no-repeat;
     background-size: 1px 100%, 100% 1px;
     background-position: right top, right bottom;
@@ -145,5 +155,21 @@ body {
     }
   }
 }
-
+@keyframes flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
+      0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
+}
 @import "vxe-table/styles/modules.scss";
