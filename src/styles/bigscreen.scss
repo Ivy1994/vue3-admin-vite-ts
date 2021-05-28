@@ -1,0 +1,39 @@
+$back-ground: "@assets/img/bigScreen/head.gif";
+html {
+  body {
+    .screen-big {
+      @apply w-screen;
+      @apply h-screen;
+      @apply bg-black;
+      @apply text-white;
+      @apply text-xs;
+      .head {
+        height: 16.666667%;
+        @apply flex;
+        @apply justify-center;
+        @apply items-center;
+        .title {
+          @apply w-auto;
+          @apply text-4xl;
+          @apply flex;
+          @apply flex-col;
+          @apply relative;
+          .text {
+            @apply w-full;
+          }
+          .bg {
+            @apply absolute;
+            background-image: url($back-ground);
+            top: 3rem;
+            width: 40rem;
+            right: -10rem;
+            height: 54px;
+            background-size: 100%;
+            background-position: 50%;
+
+          }
+        }
+      }
+    }
+  }
+}

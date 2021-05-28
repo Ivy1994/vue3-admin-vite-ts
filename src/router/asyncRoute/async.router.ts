@@ -4,7 +4,7 @@ const i18n = () => import(/* webpackTrunkName:"i18n" */ "@views/i18n/i18n");
 const echarst = () =>
   import(/* webpackTrunkName:"i18n" */ "@views/charts/echarts");
 const antv = () => import(/* webpackTrunkName:"i18n" */ "@views/charts/antv");
-
+const big = () => import("@views/bigScreen/bigScreen");
 const base_table = () =>
   import(/* webpackTrunkName:"baseTable" */ "@views/table/baseTable");
 const gridTable = () =>
@@ -118,6 +118,14 @@ const asyncRouter: AppRouteRecordRawT[] = [
         },
       },
     ],
+  },
+  {
+    path: "/clound-path",
+    name: "clound-path",
+    component: big,
+    meta: {
+      title: "大屏可视化",
+    },
   },
 ];
 export default asyncRouter;

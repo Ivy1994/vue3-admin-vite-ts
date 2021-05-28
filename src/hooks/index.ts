@@ -1,5 +1,4 @@
 import { baseConfig } from "@config/base.config";
-import { App, ref } from "@vue/runtime-core";
 let pageStatus: string = "";
 let orginTitle: string = baseConfig.sysName;
 export const useVisibility = {
