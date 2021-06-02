@@ -68,22 +68,23 @@ const splitPane = defineComponent({
       });
     });
     const hnadleMouseDown = (evt: MouseEvent) => {
+      /* 获取起始点位，并存储 */
       let { pageX, pageY } = evt;
       basePosition.pageX = pageX;
       basePosition.pageY = pageY;
+      /* 监听鼠标的移动事件 */
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
     };
     const handleMouseMove = evt => {
-      evt //阻止默认事件
-        //preventDefault()[dom标准写法(ie678不兼容)]
-        //ie678用returnValue
-        //或者利用return false也能阻止默认行为,没有兼容问题(只限传统注册方式)
-        .preventDefault();
+      /* 阻止浏览器默认事件，防止触发浏览器的手势功能 */
+      evt.preventDefault();
+      /* 设置定时器，防止dom多次回流 */
       clearTimeout(timer.value);
       timer.value = setTimeout(() => {
         let { pageX } = evt;
         const baseDiv = document.querySelector(".right-border-shadow");
+        /* 处理宽度，是否处于最大值/最小值之间 */
         let baseWidth: Number | undefined =
           Number(baseDiv?.clientWidth) + (pageX - basePosition.pageX);
         baseWidth =
@@ -93,15 +94,18 @@ const splitPane = defineComponent({
             ? props.minWidth
             : baseWidth;
         baseDiv?.setAttribute("style", `width:${baseWidth}px`);
+        /* emit宽度改变的事件 */
         ctx.emit("drugend");
+        /* 存储到store */
         setStore(baseWidth);
       }, 50);
     };
     const handleMouseUp = evt => {
+      /* 结束拖动之后，取消事件监听，并emit出最终宽度 */
       const width = document.querySelector(".right-border-shadow")?.clientWidth;
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
-      ctx.emit("drugend");
+      ctx.emit("drugend", width);
     };
 
     return () => (
@@ -123,7 +127,11 @@ const splitPane = defineComponent({
             {ctx.slots.leftContet && ctx.slots.leftContet()}
           </div>
         </div>
-        <div class={"flex flex-shrink flex-col right-border-shadow w-full md4:hidden h-60"}>
+        <div
+          class={
+            "flex flex-shrink flex-col right-border-shadow w-full md4:hidden h-60"
+          }
+        >
           <div class="w-full text-center py-4 text-xl text-gray-600 h-20">
             {title.value}
           </div>
