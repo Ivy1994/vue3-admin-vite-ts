@@ -43,9 +43,10 @@ const login = defineComponent({
     const userPwdPreIcon = {
       prefix:function(){return <i class="el-icon-unlock"></i>}
     };
-    return () => <div class="flex justify-center items-center xl:justify-between md:flex-row-reverse mr-auto md:w-screen w-screen h-screen bg-cover login-wapper">
-      <div class="bg-opacity-50  w-10/12 h-1/2 md:w-1/2 md:h-3/5 xl:w-96 xl:h-auto xl:mr-80 lg:w-1/2 lg:h-4/6 bg-gray-100 shadow-xl rounded-3xl">
-        <div class="subpixel-antialiased mt-10 md:mt-2 md:p-8 md:pb-2 font-sans text-2xl text-center md:text-left p-4 text-gray-500 hover:scale-100">欢迎来到，缝合怪的世界</div>
+    return () => <div class="flex justify-center overflow-hidden items-center xl:justify-evenly md:flex-row-reverse mr-auto w-screen h-screen">
+      <css-doodle use="var(--rule)"></css-doodle>
+      <div class=" blur-md  w-10/12 h-1/2 md:w-1/2 md:h-3/5 xl:w-96 xl:h-auto xl:mr-80 lg:w-1/2 lg:h-4/6 bg-gray-100 shadow-xl rounded-3xl">
+        <div class="subpixel-antialiased backdrop-blur-md bg-transparent z-40 mt-10 md:mt-2 md:p-8 md:pb-2 font-sans text-2xl text-center md:text-left p-4 text-gray-700 hover:scale-100">登录</div>
         <div class="w-full p-4 mt-10 md:mt-2.5 md:p-8">
           <el-form ref={loginForm} rules={loginFromRules} model={submitForm}>
             <el-form-item size="medium" prop="username">
@@ -60,7 +61,7 @@ const login = defineComponent({
             <div class="text-gray-400 cursor-pointer hover:text-red-300 w-1/2 text-right">忘记密码?</div>
           </div>
           <div class="w-full mt-2 text-center">
-            <el-button onClick={submitAction} loading = {buttonLoading.value} type="primary">submit</el-button>
+            <z-button onClick={submitAction} loading = {buttonLoading.value} type="success">submit</z-button>
              </div>
         </div>
       </div>

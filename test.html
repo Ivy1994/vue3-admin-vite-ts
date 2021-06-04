@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Title Page</title>
+    <style>
+      html,body{
+        padding: 0;
+        margin: 0;
+      }
+      .img-box-wallpaper {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+      .img-box {
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        left: 2px;
+        top: 240px;
+      }
+      .img-box:nth-child(2) {
+        left: 360px;
+        top: 40px;
+      }
+      .staitc,
+      .staitc-oht {
+        width: 100%;
+        position: absolute;
+        object-fit: cover;
+        -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+        -webkit-user-select: none; /*webkit浏览器*/
+        -khtml-user-select: none; /*早起浏览器*/
+        -moz-user-select: none; /*火狐浏览器*/
+        -ms-user-select: none; /*IE浏览器*/
+        user-select: none; /*用户是否能够选中文本*/
+      }
+      .line-box {
+        position: absolute;
+        width: 230px;
+        height: 420px;
+      }
+      .line {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .line:before {
+        position: absolute;
+        content: " ";
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(
+          to top left,
+          white,
+          white 48%,
+          gray,
+          white 51%,
+          white
+        );
+        left: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="img-box-wallpaper">
+      <div class="img-box">
+        <img src="./666.png" class="staitc" alt="" />
+      </div>
+      <div class="img-box">
+        <img src="./666.gif" class="staitc-oht" alt="" />
+      </div>
+    </div>
+    <script>
+      let isPC = true;
+      /* 移动端长按事件处理 */
+      let timer = null;
+      let startTime = "";
+      let endTime = "";
+      if (/windows phone|iphone|android/gi.test(window.navigator.userAgent)) {
+        isPC = false;
+      }
+      const el = document.querySelector(".staitc");
+      const ohtEl = document.querySelector(".staitc-oht");
+      const chooseEl = [el,ohtEl]
+      const changeEl = (type,oth) => {
+        if (type) {
+          chooseEl[oth].setAttribute("src", "./666.gif");
+        } else {
+          chooseEl[oth].setAttribute("src", "./666.png");
+        }
+      };
+      if (isPC) {
+        el.addEventListener("mouseover", () => {
+          changeEl(true,0);
+        });
+        el.addEventListener("mouseout", () => {
+          changeEl(false,0);
+        });
+        ohtEl.addEventListener("mouseover", () => {
+          changeEl(false,1);
+        });
+        ohtEl.addEventListener("mouseout", () => {
+          changeEl(true,1);
+        });
+      } else {
+        el.addEventListener("touchstart", function(e) {
+          startTime = +new Date();
+          e.stopPropagation();
+          e.preventDefault(); //阻止默认跳转
+          timer = setTimeout(function() {
+            changeEl(true,0);
+          }, 700);
+        });
+        el.addEventListener("touchend", function() {
+          endTime = +new Date();
+          clearTimeout(timer);
+          changeEl(false,0);
+        });
+        ohtEl.addEventListener("touchstart", function(e) {
+          startTime = +new Date();
+          e.stopPropagation();
+          e.preventDefault(); //阻止默认跳转
+          timer = setTimeout(function() {
+            changeEl(false,1);
+          }, 700);
+        },{passive: false});
+        // ohtEl.addEventListener("touchmove", function(e) {
+        //   startTime = +new Date();
+        //   e.stopPropagation();
+        //   e.preventDefault(); //阻止默认跳转
+        //   timer = setTimeout(function() {
+        //     changeEl(false,1);
+        //   }, 700);
+        // });
+        ohtEl.addEventListener("touchend", function() {
+          endTime = +new Date();
+          clearTimeout(timer);
+          changeEl(true,1);
+        },{passive: false});
+      }
+      const computedLine = (elP,othP) =>{
+        const top = othP.y+(240/2)
+        const width = othP.x-(elP.x+240);
+        const height = (elP.y+(240/2))-top
+        const left = elP.x+240
+      return `top:${top}px;left:${left}px;width:${width}px;height:${height}px`
+      }
+      const createEle = (elPositn,ohtElPositn) =>{
+        const wall = document.querySelector(".img-box-wallpaper")
+        const Fr = document.createDocumentFragment()
+        const lineBox = document.createElement("div")
+        const line = document.createElement("div")
+        lineBox.setAttribute("class","line-box")
+        line.setAttribute("class","line")
+        const style = computedLine(elPositn,ohtElPositn)
+        lineBox.setAttribute("style",style)
+        lineBox.appendChild(line)
+        Fr.appendChild(lineBox)
+        wall.appendChild(Fr)
+      }
+      const getPointAb = node => {
+        var x = 0;
+        var y = 0;
+        while (node) {
+          x += node.offsetLeft;
+          y += node.offsetTop;
+          node = node.offsetParent;
+        }
+        return { x: x, y: y };
+      };
+      const imgBox = document.querySelectorAll(".img-box")
+      const elPositn = getPointAb(imgBox[0])
+      const ohtElPositn = getPointAb(imgBox[1])
+      createEle(elPositn,ohtElPositn)
+    </script>
+  </body>
+</html>

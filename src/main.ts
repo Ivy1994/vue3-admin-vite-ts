@@ -28,6 +28,7 @@ asyncComponent(app); //异步组件
 useVisibility.init(); //趣味功能
 app.use(echarts); //echarts
 app.use(createHead());
+app.config.isCustomElement = tag => tag.startsWith('css-')//处理 css-doodle
 if (router.isReady()) {
   app.mount("#app");
 }
