@@ -16,6 +16,13 @@ export function setPlugins(command: string) {
   plugins.push(
     vue({
       include: [/\.vue$/, /\.md$/],
+      template: {
+        compilerOptions: {
+          isCustomElement:(tag)=>{
+            return tag.startsWith("css-d")
+          }
+        }
+      }
     })
   );
   plugins.push(
