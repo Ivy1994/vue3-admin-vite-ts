@@ -35,6 +35,21 @@ const zSlider = defineComponent({
     const handleSelect = name => {
       router.push({ name });
     };
+    const iconItem = v => {
+      return v.meta.icon ? (
+        v.meta.icon.includes("el-icon") || v.meta.icon.includes("iconfont") ? (
+          <i class={v.meta.icon}></i>
+        ) : (
+          <svg-icon
+            size={20}
+            class="inline-block w-auto px-2"
+            name={v.meta.icon}
+          ></svg-icon>
+        )
+      ) : (
+        ""
+      );
+    };
     const slot = (route: AppRouteRecordRawT[]): Array<any> => {
       return route.map(v => {
         if (v.children && v.children.length) {
@@ -44,11 +59,7 @@ const zSlider = defineComponent({
               v-slots={{
                 title: () => (
                   <div>
-                    <svg-icon
-                      size={20}
-                      class="inline-block w-auto px-2"
-                      name={v.meta.icon}
-                    ></svg-icon>
+                    {iconItem(v)}
                     <span>{v.meta.title}</span>
                   </div>
                 ),
@@ -65,11 +76,7 @@ const zSlider = defineComponent({
                 title: () => <span>{v.meta.title}</span>,
               }}
             >
-              <svg-icon
-                size={20}
-                class="inline-block w-auto px-2"
-                name={v.meta.icon}
-              ></svg-icon>
+              {iconItem(v)}
             </el-menu-item>
           );
         }

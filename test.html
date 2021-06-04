@@ -129,14 +129,6 @@
             changeEl(false,1);
           }, 700);
         },{passive: false});
-        // ohtEl.addEventListener("touchmove", function(e) {
-        //   startTime = +new Date();
-        //   e.stopPropagation();
-        //   e.preventDefault(); //阻止默认跳转
-        //   timer = setTimeout(function() {
-        //     changeEl(false,1);
-        //   }, 700);
-        // });
         ohtEl.addEventListener("touchend", function() {
           endTime = +new Date();
           clearTimeout(timer);
