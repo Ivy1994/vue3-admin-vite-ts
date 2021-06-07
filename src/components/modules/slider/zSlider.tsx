@@ -4,6 +4,7 @@ import { computed, defineComponent, TransitionGroup } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
 import { changeTheme } from "@utils/theme";
+import {getRouteByName} from "@router/utils"
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },
@@ -32,8 +33,15 @@ const zSlider = defineComponent({
       return sysStore.theme === "dark";
     });
     const routeStore = useRouteStore();
-    const handleSelect = name => {
-      router.push({ name });
+    const handleSelect = name => {    
+      const routes =useRouteStore()
+      const asyncRoutes = routes.asyncRouts
+      const item = getRouteByName(name,asyncRoutes)  
+      if(item?.meta?.isExt) {
+        window.location.href = item.path as any
+      } else {
+          router.push({ name });
+      }
     };
     const iconItem = v => {
       return v.meta.icon ? (
@@ -52,7 +60,8 @@ const zSlider = defineComponent({
     };
     const slot = (route: AppRouteRecordRawT[]): Array<any> => {
       return route.map(v => {
-        if (v.children && v.children.length) {
+        if(v.meta.eachInMenu === undefined && v.meta.eachInMenu !==false) {
+    if (v.children && v.children.length) {
           return (
             <el-submenu
               index={v.name}
@@ -80,6 +89,10 @@ const zSlider = defineComponent({
             </el-menu-item>
           );
         }
+        } else {
+          return ''
+        }
+
       });
     };
     const beforeClose = () => {

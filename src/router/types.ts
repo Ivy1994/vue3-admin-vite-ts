@@ -7,6 +7,7 @@ interface RouteMeta {
   eachInMenu?: boolean;
   permissions?: string[];
   keep?: boolean;
+  isExt?:boolean;
 }
 //@ts-ignore
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, "meta"> {

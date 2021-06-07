@@ -79,12 +79,13 @@ const asyncRouter: AppRouteRecordRawT[] = [
         },
       },
       {
-        path: "gridTable",
+        path: "https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/start/install",
         name: "gridTable",
         component: gridTable,
         meta: {
-          title: "grid表格",
+          title: "表格文档",
           icon: "grid",
+          isExt:true
         },
       },
     ],
@@ -125,6 +126,7 @@ const asyncRouter: AppRouteRecordRawT[] = [
     component: big,
     meta: {
       title: "大屏可视化",
+      eachInMenu:false,
     },
   },
 ];
