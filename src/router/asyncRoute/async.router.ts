@@ -20,7 +20,6 @@ const asyncRouter: AppRouteRecordRawT[] = [
     component: layout,
     meta: {
       title: "首页",
-      permissions: ["edit"],
       icon: "index",
     },
     children: [
@@ -30,7 +29,6 @@ const asyncRouter: AppRouteRecordRawT[] = [
         component: indexMd,
         meta: {
           title: "控制台",
-          permissions: ["author"],
           icon: "index",
         },
       },

@@ -17,7 +17,7 @@ export const filterRoutes = (routes: AppRouteRecordRawT[]) => {
     }
   });
   if (store.permissions.includes("admin")) return routes;
-  if (!baseConfig.skipToken) return routes;
+  if (baseConfig.skipToken) return routes;
   return finallyRoutes;
 };
 

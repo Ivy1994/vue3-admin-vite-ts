@@ -23,24 +23,18 @@ const reutnData = (token,data) =>{
 }
 export default [
   {
-    url: "/api/get",
-    method: "get",
-    response: ({ query }) => {
-      return {
-        code: 403,
-        data: {
-          name: "vben",
-        },
-      };
-    },
-  },
-  {
     url: "/api/user/info",
     method: "get",
     response: req => {
+      let permissions:string[] = [];
+      if(req.headers["access_token"].includes("admin")) {
+        permissions.push("admin")
+      } else {
+        permissions.push("user")
+      }
       return reutnData("1231232123",{
         username: "我不爱吃鱼鱼鱼鱼",
-        permissions: ["admin"],
+        permissions,
         email: Random.email(),
         avater: Random.image("64x64", "red", "yuyuyu"),
       })
@@ -50,10 +44,17 @@ export default [
     url: "/api/user/login",
     method: "post",
     response: req => {
+      console.log(req.body);
+      let token:string = ""
+      if(req.body["username"].includes("admin")) {
+        token ="admin_123ashdkhaskjdhk"
+        } else {
+          token = "user_kdhakjsoib234oisd2480asd.asdas214asd"
+        }
       return {
         code: 200,
         data: {
-          token: "21ASDADOYO2KBKJHSAD689BK21",
+          token,
         },
       };
     },

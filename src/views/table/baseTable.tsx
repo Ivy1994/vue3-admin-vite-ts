@@ -2,22 +2,12 @@ import tableModel from "@apis/table/table";
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import { VxeTableInstance } from "vxe-table";
 import _ from "loadsh";
-import { getAnyKey } from "@utils/utils";
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {
     const baseTableRef = ref({} as VxeTableInstance);
     const tableData = ref([]);
     const loading = ref(false);
-    const aa = {
-      a: {
-        s: {
-          c: 222,
-        },
-      },
-    };
-    console.log(getAnyKey(aa, "a.c", 100));
-
     const pageConf = reactive({
       pageSize: 20,
       currentPage: 1,
@@ -35,13 +25,12 @@ const baseTable = defineComponent({
           currentPage: pageConf.currentPage,
         })
         .then(res => {
-          // baseTableRef.value.loadData(res.list);
           tableData.value = res.list;
           pageConf.total = res.total;
           loading.value = false;
         })
         .catch(err => {
-          console.log(err);
+          tableData.value= []
           loading.value = false;
         });
     };
