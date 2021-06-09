@@ -11,18 +11,13 @@ import viteSvgIcons from "vite-plugin-svg-icons";
 import path from "path";
 import vue from "@vitejs/plugin-vue";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { BuildConfig } from "../config";
+const { webTitle, needMock } = BuildConfig;
 export function setPlugins(command: string) {
   const plugins: any[] = [];
   plugins.push(
     vue({
       include: [/\.vue$/, /\.md$/],
-      template: {
-        compilerOptions: {
-          isCustomElement:(tag)=>{
-            return tag.startsWith("css-d")
-          }
-        }
-      }
     })
   );
   plugins.push(
@@ -62,7 +57,7 @@ export function setPlugins(command: string) {
   });
   plugins.push(element);
   //mock-server
-  const mock = viteMockServe({
+ const mock = viteMockServe({
     mockPath: "src/mock",
     watchFiles: true,
     logger: true,
@@ -74,7 +69,7 @@ export function setPlugins(command: string) {
   `,
     supportTs: true,
   });
-  plugins.push(mock);
+  needMock &&  plugins.push(mock);
   //ts路径
   plugins.push(tsconfigPaths());
   /* html */
@@ -82,7 +77,7 @@ export function setPlugins(command: string) {
   plugins.push(
     injectHtml({
       injectData: {
-        title: "小裁缝",
+        title: webTitle,
         // injectScript: `<link rel="stylesheet" href="./tailwind.css">`,
       },
     })
