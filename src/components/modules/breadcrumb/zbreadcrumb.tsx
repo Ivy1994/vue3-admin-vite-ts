@@ -15,10 +15,9 @@ const zBreadcrumb = defineComponent({
     const route = useRoute();
     const exp = () => {
       /* 改变全局状态 */
-      throw new Error("1111")
-      // useStore.$patch({
-      //   collapse: !isExp.value,
-      // });
+      useStore.$patch({
+        collapse: !isExp.value,
+      });
     };
     return () => (
       <div class="h-full pl-4 flex items-center truncate">
