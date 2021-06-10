@@ -2,12 +2,14 @@ import { defineStore } from "pinia";
 import { AppRouteRecordRawT } from "@router/types";
 import { router } from "@router/index";
 import { changeTheme } from "@utils/theme";
+import Use_DB from "src/hooks/useDB";
 const tags: AppRouteRecordRawT[] = []; /* 动态增加的tags */
 const fixedTags: AppRouteRecordRawT[] = []; /* 固定tags */
 export enum Theme{
   dark="dark",
   light="light"
 }
+const baseSql:unknown = "";
 const keepRoutes: string[] = [];
 export const useSysStore = defineStore({
   id: "sys",
@@ -18,6 +20,7 @@ export const useSysStore = defineStore({
       fixedTags,
       acitveName: "",
       keepRoutes,
+      baseSql,
       theme:""
     };
   },

@@ -1,56 +1,193 @@
-export interface DBoptions {
-  version: number | string /* 版本信息 */;
-  name: string /* 数据库name */;
-}
-function isFloat(number: string): boolean {
+import localforage from "localforage";
+import { isArray } from "src/directive/modules/button";
+export function isFloat(number: any): boolean {
+  if (number === undefined || number === null) return true;
   return /^\d+(\.\d+)?$/.test(number);
 }
+export type updateType = "r" | "i" | "u";
+export interface DBoptions extends Omit<LocalForageOptions, "storeName"> {
+  storeName: string | Array<string>;
+}
+export type storeType = string;
 class Use_DB {
-  protected db: IDBOpenDBRequest | null;
+  protected DBMAp: Map<storeType, LocalForage> = new Map();
   protected options: DBoptions;
-  protected indexedDB:unknown;
-  protected IDBTransaction:unknown;
-  protected IDBKeyRange:unknown;
   constructor(options: DBoptions) {
     this.options = options;
-    this.db = null;
     this.init();
   }
-  init() {
-    this.hasDB()
-    if(!this.indexedDB) throw new Error("不支持数据库访问，请更换浏览器")
-    if (isFloat(this.options.version.toString()))
+  protected init() {
+    if (!this.hasDB()) throw new Error("不支持数据库访问，请更换浏览器");
+    
+    if (isFloat(this.options?.version))
       console.log(
-        "[indexedDB]waring:浮点数作为版本号，，这可能导致 upgradeneeded 事件不会被触发"
+        "[indexedDB]waring:浮点数作为版本号，这可能导致 upgradeneeded 事件不会被触发"
       );
-      console.log("正在链接数据库，请稍后");
-      
-    this.db = indexedDB.open(this.options.name, Number(this.options.version));
-    this.db.onerror = this.requestError;
-    this.db.onsuccess = this.requestSuccess;
+    const { storeName,name,version } = this.options;
+    if(storeName) {
+      this.addSource(storeName);
+    }
   }
-  requestError(error): never {
-    throw new Error(error);
+  updateItem (currentSource: string, key: string,data:any,type?:updateType,){
+    const currentSor = this.DBMAp.get(currentSource);
+    if(!currentSor) {
+      this.addSource(currentSource)
+    }
+    //@ts-ignore
+    this.updateArrayData(currentSor,data,key)
   }
-  requestSuccess(event: Event): void {
-    console.log("数据库链接成功...");
+  getItem(currentSource: string, key: string): Promise<any> {
+    if (!key || !currentSource)
+      Promise.reject(new Error("未选择数据仓库或未输入查询key值"));
+    const currentSor = this.DBMAp.get(currentSource);
+    return new Promise(async (reslove, reject) => {
+      try {
+        reslove(currentSor?.getItem(key));
+      } catch (e) {
+        reject(e);
+      }
+    });
   }
-  hasDB() {
-    // In the following line, you should include the prefixes of implementations you want to test.
-    this.indexedDB =
-      window.indexedDB ||
-      window.mozIndexedDB ||
-      window.webkitIndexedDB ||
-      window.msIndexedDB;
-    // DON'T use "var indexedDB = ..." if you're not in a function.
-    // Moreover, you may need references to some window.IDB* objects:
-    this.IDBTransaction =
-      window.IDBTransaction ||
-      window.webkitIDBTransaction ||
-      window.msIDBTransaction;
-    this.IDBKeyRange =
-      window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-    // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
+  setItem(currentSource: string, key: string, value: any): Promise<any> {
+    if (!currentSource || !key)
+      Promise.reject(new Error("未选择数据仓库或未输入key值"));
+    const currentSor = this.DBMAp.get(currentSource);
+    const isExist =  this.beforeSet(currentSource, key)
+    if(!isExist) return Promise.reject(new Error("不存在的项目"))
+    return new Promise(async (reslove, reject) => {
+      try {
+        await currentSor?.setItem(key, value);
+        reslove(value);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+  removeItem(currentSource: string, key: string): Promise<any> {
+    if (!key || !currentSource)
+      Promise.reject(new Error("未选择数据仓库或未输入key值"));
+    return new Promise((reslove, reject) => {
+      try {
+        this.DBMAp.get(currentSource)
+          ?.removeItem(key, () => {
+            reslove("success");
+          })
+          .catch(e => {
+            throw new Error(e);
+          });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+  async removeTable(currentSource: string): Promise<any> {
+    if (!currentSource) Promise.reject(new Error("未选择数据仓库"));
+    await this.DBMAp.get(currentSource)?.clear();
+    return Promise.resolve();
+  }
+  async updateArrayData(
+    curDB: string,
+    list: Array<any>,
+    key: string,
+    type?: updateType
+  ) {
+    try {
+      const isTable = this.hasTable(curDB)
+      if(!isTable) throw new Error("没有对应表，请先添加对应表");
+      const DB = await this.DBMAp.get(curDB)
+      const value = await DB?.getItem(key);
+      if (value && isArray(value)) {
+        switch (type) {
+          case "i":
+            (value as Array<any>).push([...list]);
+            await DB?.setItem(key, value);
+            break;
+          case "r":
+            await DB?.setItem(key, list);
+            break;
+          case "u":
+            (value as Array<any>).unshift(list);
+            break;
+          default:
+            (value as Array<any>).push([...list]);
+            await DB?.setItem(key, value);
+            break;
+        }
+      } else {
+        await DB?.setItem(key, list);
+      }
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+  clearOrgin(): void {
+    this.DBMAp.forEach(v => {
+      v.clear();
+    });
+  }
+  addSource(sourceName: string | Array<string>) {
+    const { name, version } = this.options;
+    if (Array.isArray(sourceName)) {
+      sourceName.forEach(v => {
+        const db = localforage.createInstance({
+          name,
+          version,
+          storeName: v,
+        });
+        this.DBMAp.set(v, db);
+      });
+    } else {
+      const db = localforage.createInstance({
+        name,
+        version,
+        storeName: sourceName,
+      });
+      this.DBMAp.set(sourceName, db);
+    }
+  }
+  protected hasDB() {
+    return (
+      localforage.supports(localforage.INDEXEDDB) ||
+      localforage.supports(localforage.WEBSQL) ||
+      localforage.supports(localforage.LOCALSTORAGE)
+    );
+  }
+  beforeSet(currentSource: string, key: string){
+    const hasTable = this.hasTable(currentSource)
+    if(!hasTable) return false;
+    return true
+  }
+  hasTable(key):boolean{
+    let index = false;
+    this.DBMAp.forEach((v,i)=>{
+      if(i === key) {
+        index = true
+      }
+    })
+    return index
+  }
+  async hasColumns (db,key) {
+    let kyes = await db.keys();
+    if(!kyes) return false;
+    if(!kyes.length) return false;
+    return kyes.some(v =>v=== key)
+  }
+  get source() {
+    const res = {};
+    this.DBMAp.forEach(async (i, v) => {
+      let kyes = await i.keys();
+      if (kyes.length) {
+        const item = {};
+        kyes.forEach(async (value, index) => {
+          const itemValue = await this.getItem(v, value);
+          Object.assign(item, { [value]: itemValue });
+        });
+        Object.assign(res, { [v]: item });
+      } else {
+        Object.assign(res, { [v]: "" });
+      }
+    });
+    return res;
   }
 }
 export default Use_DB;

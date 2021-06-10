@@ -20,6 +20,7 @@
     "github-markdown-css": "^4.0.0",
     "install": "^0.13.0",
     "loadsh": "^0.0.4",
+    "localforage": "^1.9.0",
     "marked": "^2.0.3",
     "mockjs": "^1.1.0",
     "pinia": "^2.0.0-alpha.13",

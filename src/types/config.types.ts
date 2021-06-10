@@ -11,6 +11,8 @@ export interface BaseConfig {
   sysName: string; //系统前缀
   skipToken: boolean; //路由是否需要权限认证
   componetTrans?: TransName;
+  sqlName?:string,
+  sqlVersion:number
 }
 export enum TransName {
   Top = "top", //登录失效

@@ -5,7 +5,6 @@ const echarst = () =>
   import(/* webpackTrunkName:"i18n" */ "@views/charts/echarts");
 const antv = () => import(/* webpackTrunkName:"i18n" */ "@views/charts/antv");
 const big = () => import("@views/bigScreen/bigScreen");
-const db = () => import("@views/indexedDB/indexedDB");
 
 const base_table = () =>
   import(/* webpackTrunkName:"baseTable" */ "@views/table/baseTable");
@@ -127,14 +126,6 @@ const asyncRouter: AppRouteRecordRawT[] = [
     meta: {
       title: "大屏可视化",
       eachInMenu:false,
-    },
-  },
-  {
-    path: "/indexed_db",
-    name: "indexed_db",
-    component: db,
-    meta: {
-      title: "indexedDB",
     },
   },
 ];

@@ -14,4 +14,6 @@ export const baseConfig: BaseConfig = {
   sysName: "小裁缝",
   skipToken: false,
   componetTrans: TransName.Scale,
+  sqlName:"baseSysSource",
+  sqlVersion:1
 };
