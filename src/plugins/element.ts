@@ -1,6 +1,6 @@
 import type {App} from "vue"
 import i18n from "./i18n"
-import 'element-plus/packages/theme-chalk/src/base.scss'
+// import 'element-plus/packages/theme-chalk/src/base.scss'
 import {
   ElAlert,
   ElAside,

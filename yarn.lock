@@ -1744,10 +1744,10 @@ electron-to-chromium@^1.3.723:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.727.tgz#857e310ca00f0b75da4e1db6ff0e073cc4a91ddf"
   integrity sha512-Mfz4FIB4FSvEwBpDfdipRIrwd6uo8gUDoRDF4QEYb4h4tSuI3ov594OrjU6on042UlFHouIJpClDODGkPcBSbg==
 
-element-plus@^1.0.2-beta.40:
-  version "1.0.2-beta.41"
-  resolved "https://registry.yarnpkg.com/element-plus/-/element-plus-1.0.2-beta.41.tgz#9c234b536b3401d042505c003e579bd65081f0f0"
-  integrity sha512-GikmQdajaKB5oLxfHxhKXGXtiNoaN1wYiLr9aRx+yxwLx3nPDfoBx60+nrZoN6BOCk2M0HjBVj9TtA214WLRYw==
+element-plus@^1.0.2-beta.46:
+  version "1.0.2-beta.46"
+  resolved "https://registry.yarnpkg.com/element-plus/-/element-plus-1.0.2-beta.46.tgz#2423dcc56ce4285d7f2365ebd5622b8b3c7d053b"
+  integrity sha512-GevU3xNiIp+p9ZGnGRtFaJPnofsMXKwqV+cTXC266vUWw08Hbt1ronTsss/eJJ1OIHLoaFq4febv1MMTBSSjlQ==
   dependencies:
     "@popperjs/core" "^2.4.4"
     "@types/lodash" "^4.14.161"

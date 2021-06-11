@@ -22,9 +22,6 @@ const zSlider = defineComponent({
       changeTheme(sysTheme);
     };
     const route = useRoute();
-    // setTimeout(()=>{
-    //   changeTheme("dark")
-    // },2000)
     const router = useRouter();
     const activePAth = computed(() => {
       return route.name;
