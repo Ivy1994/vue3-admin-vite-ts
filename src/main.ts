@@ -1,3 +1,4 @@
+import "element-plus/packages/theme-chalk/src/base.scss"
 import { createApp } from "vue";
 import App from "./App";
 import { setupEle } from "@plugins/element";
