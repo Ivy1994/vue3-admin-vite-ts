@@ -1,1 +1,0 @@
-import{d as s,t as a,a9 as t}from"./element-plus.5517972d.js";const e=s({setup:()=>()=>a("div",{class:"screen-big"},[a("div",{class:"head"},[a("div",{class:"title"},[a("div",{class:"text"},[t("小裁缝可视化chart图")]),a("div",{class:"bg"},null)])])])});export default e;
