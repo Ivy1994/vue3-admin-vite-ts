@@ -39,25 +39,25 @@ export function setPlugins(command: string) {
   //   include: path.resolve(__dirname, './src/locales/**')
   // }))
   //按需引入element
-  const element = styleImport({
-    libs: [
-      {
-        libraryName: "element-plus",
-        esModule: true,
-        ensureStyleFile: true,
-        resolveStyle: name => {
-          name = name.slice(3);
-          return `element-plus/packages/theme-chalk/src/${name}.scss`;
-        },
-        resolveComponent: name => {
-          return `element-plus/lib/${name}`;
-        },
-      },
-    ],
-  });
-  plugins.push(element);
+  // const element = styleImport({
+  //   libs: [
+  //     {
+  //       libraryName: "element-plus",
+  //       esModule: true,
+  //       ensureStyleFile: true,
+  //       resolveStyle: name => {
+  //         name = name.slice(3);
+  //         return `element-plus/packages/theme-chalk/src/${name}.scss`;
+  //       },
+  //       resolveComponent: name => {
+  //         return `element-plus/lib/${name}`;
+  //       },
+  //     },
+  //   ],
+  // });
+  // plugins.push(element);
   //mock-server
- const mock = viteMockServe({
+  const mock = viteMockServe({
     mockPath: "src/mock",
     watchFiles: true,
     logger: true,
@@ -69,7 +69,7 @@ export function setPlugins(command: string) {
   `,
     supportTs: true,
   });
-  needMock &&  plugins.push(mock);
+  needMock && plugins.push(mock);
   //ts路径
   plugins.push(tsconfigPaths());
   /* html */

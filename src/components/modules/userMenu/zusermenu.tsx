@@ -3,9 +3,9 @@ import { localStoreApi } from "@store/localStore/local";
 import { useSysStore } from "@store/sys";
 import { useUserStore } from "@store/user";
 import { changeTheme } from "@utils/theme";
+import { NDropdown } from "naive-ui";
 import { defineComponent, nextTick, reactive, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { useRoute, useRouter } from "vue-router";
 
 const zUserMenu = defineComponent({
   name: "zUsermenu",
@@ -51,6 +51,18 @@ const zUserMenu = defineComponent({
       let id = e.target.id;
       id && handleClick[id]();
     };
+    const selectVal = [
+      {
+        label: "中文",
+        key: "zh",
+        disabled: false,
+      },
+      {
+        label: "English",
+        key: "en",
+        disabled: false,
+      },
+    ];
     return () => (
       <div class="w-full flex  justify-end items-center pr-10 h-full">
         <div
@@ -64,19 +76,7 @@ const zUserMenu = defineComponent({
             id="lang "
             class=" w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400"
           >
-            <el-dropdown
-              size="mini"
-              onCommand={handChangeLang}
-              v-slots={{
-                dropdown: () => (
-                  <el-dropdown-menu>
-                    <el-dropdown-item command="zh">Chinese</el-dropdown-item>
-                    <el-dropdown-item command="en">English</el-dropdown-item>
-                  </el-dropdown-menu>
-                ),
-              }}
-            >
-              {}
+            <NDropdown options={selectVal} onSelect={handChangeLang}>
               <i
                 class={
                   "iconfont text-base " +
@@ -85,7 +85,7 @@ const zUserMenu = defineComponent({
                     : " iconzhongyingwenyingwen02-01")
                 }
               ></i>
-            </el-dropdown>
+            </NDropdown>
           </div>
           <div class=" w-4 text-center transform hover:scale-125 duration-100 border-b-2 border-solid border-opacity-50 border-red-400">
             <i id="search" class="iconfont iconsousuo text-base"></i>

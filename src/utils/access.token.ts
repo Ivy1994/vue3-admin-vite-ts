@@ -3,7 +3,6 @@ import { baseConfig } from "@config/base.config";
 import { useRouter } from "vue-router";
 //@ts-ignore
 import { StoreLocal } from "@types/config.types";
-import { ElNotification } from "element-plus";
 
 export const getToken = (): string => {
   const store = useLocal();
@@ -36,12 +35,12 @@ export const setToken = (val: string): string => {
 export const removeToken = (): void => {
   const store = useLocal();
   store.remove(baseConfig.tokenName);
-  ElNotification({
-    title: "提示",
-    message: "登录注销成功，正在清理数据ing...",
-    type: "success",
-    duration: 3000,
-  });
+  // ElNotification({
+  //   title: "提示",
+  //   message: "登录注销成功，正在清理数据ing...",
+  //   type: "success",
+  //   duration: 3000,
+  // });
   setTimeout(() => {
     window.location.reload();
   }, 1000);

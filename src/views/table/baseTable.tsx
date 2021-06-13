@@ -2,6 +2,7 @@ import tableModel from "@apis/table/table";
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import { VxeTableInstance } from "vxe-table";
 import _ from "loadsh";
+import { NInput } from "naive-ui";
 const baseTable = defineComponent({
   name: "baseTable",
   setup() {
@@ -30,14 +31,12 @@ const baseTable = defineComponent({
           loading.value = false;
         })
         .catch(err => {
-          tableData.value= []
+          tableData.value = [];
           loading.value = false;
         });
     };
     const inputSlot = {
-      default: ({ row }) => (
-        <el-input size="mini" v-model={row.name}></el-input>
-      ),
+      default: ({ row }) => <NInput v-model={row.name}></NInput>,
     };
     const searchMethod = e => {
       let { pageSize, currentPage, type } = e;
@@ -55,7 +54,6 @@ const baseTable = defineComponent({
     return () => (
       <div>
         <vxe-table
-          v-loading={loading.value}
           header-row-class-name="table-header"
           cell-class-name="table-cell"
           border="full"

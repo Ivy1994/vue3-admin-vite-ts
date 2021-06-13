@@ -1,10 +1,18 @@
 import { useRouteStore } from "@store/routes";
 import { useSysStore } from "@store/sys";
-import { computed, defineComponent, TransitionGroup } from "vue";
+import {
+  computed,
+  createVNode,
+  defineComponent,
+  TransitionGroup,
+  h,
+  VNodeChild,
+} from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
 import { changeTheme } from "@utils/theme";
-import {getRouteByName} from "@router/utils"
+import { getRouteByName } from "@router/utils";
+import { MenuOption, NIcon, NMenu } from "naive-ui";
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },
@@ -21,6 +29,38 @@ const zSlider = defineComponent({
       });
       changeTheme(sysTheme);
     };
+    const iconItem = (v: AppRouteRecordRawT) => {
+      if (v?.meta?.icon) {
+        if (
+          v.meta.icon.includes("el-icon") ||
+          v.meta.icon.includes("iconfont")
+        ) {
+          return () => h("i", null, { class: v.meta.icon });
+        } else {
+          return () =>
+            h(NIcon, { size: 24 }, h(<svg-icon name={v.meta.icon}></svg-icon>));
+        }
+      } else {
+        return "";
+      }
+    };
+    const sertMenuOption = (list: AppRouteRecordRawT[]) => {
+      const finallyRoutes: MenuOption[] = [];
+      list.forEach(v => {
+        let item = { ...v };
+        const tempItem: MenuOption = {
+          label: item.meta.title || "",
+          key: item.name,
+          path: item.path,
+          icon: iconItem(v) as unknown,
+        };
+        if (item.children && item.children.length) {
+          Object.assign(tempItem, { children: sertMenuOption(item.children) });
+        }
+        v.meta.eachInMenu === false ? "" : finallyRoutes.push(tempItem);
+      });
+      return finallyRoutes;
+    };
     const route = useRoute();
     const router = useRouter();
     const activePAth = computed(() => {
@@ -30,67 +70,18 @@ const zSlider = defineComponent({
       return sysStore.theme === "dark";
     });
     const routeStore = useRouteStore();
-    const handleSelect = name => {    
-      const routes =useRouteStore()
-      const asyncRoutes = routes.asyncRouts
-      const item = getRouteByName(name,asyncRoutes)  
-      if(item?.meta?.isExt) {
-        window.location.href = item.path as any
+    const menudata = sertMenuOption(routeStore.asyncRouts);
+    const handleSelect = (value, item) => {
+      if (isExt(item.path)) {
+        window.location.href = item.path as any;
       } else {
-          router.push({ name });
+        router.push({ name: value });
       }
     };
-    const iconItem = v => {
-      return v.meta.icon ? (
-        v.meta.icon.includes("el-icon") || v.meta.icon.includes("iconfont") ? (
-          <i class={v.meta.icon}></i>
-        ) : (
-          <svg-icon
-            size={20}
-            class="inline-block w-auto px-2"
-            name={v.meta.icon}
-          ></svg-icon>
-        )
-      ) : (
-        ""
-      );
-    };
-    const slot = (route: AppRouteRecordRawT[]): Array<any> => {
-      return route.map(v => {
-        if(v.meta.eachInMenu === undefined && v.meta.eachInMenu !==false) {
-    if (v.children && v.children.length) {
-          return (
-            <el-submenu
-              index={v.name}
-              v-slots={{
-                title: () => (
-                  <div>
-                    {iconItem(v)}
-                    <span>{v.meta.title}</span>
-                  </div>
-                ),
-              }}
-            >
-              {slot(v.children as AppRouteRecordRawT[])}
-            </el-submenu>
-          );
-        } else {
-          return (
-            <el-menu-item
-              index={v.name}
-              v-slots={{
-                title: () => <span>{v.meta.title}</span>,
-              }}
-            >
-              {iconItem(v)}
-            </el-menu-item>
-          );
-        }
-        } else {
-          return ''
-        }
-
-      });
+    const isExt = (value: string) => {
+      if (value.startsWith("http://") || value.startsWith("https://"))
+        return true;
+      return false;
     };
     const beforeClose = () => {
       sysStore.$patch({
@@ -111,23 +102,14 @@ const zSlider = defineComponent({
           }
         >
           <z-logo></z-logo>
-          <el-menu
-            size="mini"
-            default-active={activePAth.value}
-            onSelect={handleSelect}
-            menu-trigger="click"
-            background-color={isDark.value ? "#000" : "#fff"}
-            text-color={isDark.value ? "#aaa" : "#303133"}
-            active-text-color="#F87171"
-            collapse={isCollapse.value}
-            class="w-full slider-bar"
-            unique-opened={true}
-          >
-            {slot(routeStore.asyncRouts)}
-          </el-menu>
+          <NMenu
+            onUpdateValue={handleSelect}
+            defaultValue={activePAth.value as any}
+            options={menudata}
+          ></NMenu>
         </div>
         <div class="mmd:hidden h-screen">
-          <el-drawer
+          {/* <el-drawer
             modelValue={isCollapse.value}
             direction="ltr"
             destroy-on-close
@@ -167,7 +149,7 @@ const zSlider = defineComponent({
                 )}
               </div>
             </div>
-          </el-drawer>
+          </el-drawer> */}
         </div>
       </>
     );

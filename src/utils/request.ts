@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { baseConfig } from "@config/base.config";
-import { ElNotification } from "element-plus";
 import { getToken, removeToken } from "./access.token";
 /* responseData */
 export interface ResponseData {
@@ -60,12 +59,12 @@ const errorHander = (code: number, err, message?: string): void => {
       msg = `请求出错:${err.message}`;
   }
   msg = message || msg;
-  ElNotification({
-    title: "提示",
-    message: msg,
-    duration: baseConfig.duration,
-    type: "error",
-  });
+  // ElNotification({
+  //   title: "提示",
+  //   message: msg,
+  //   duration: baseConfig.duration,
+  //   type: "error",
+  // });
 };
 /* config配置 */
 serve.interceptors.request.use((config: AxiosRequestConfig) => {

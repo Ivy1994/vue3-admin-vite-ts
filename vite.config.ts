@@ -40,24 +40,21 @@ export default async ({
       rollupOptions: {
         output: {
           manualChunks: {
-            "element-plus": ["element-plus"],
             "vxe-table": ["vxe-table"],
-            "echarts":["echarts"],
-            "vue-i18n":["vue-i18n"],
-            "pinia":["pinia"],
-            "xe-utils":["xe-utils"]
+            echarts: ["echarts"],
+            "vue-i18n": ["vue-i18n"],
+            pinia: ["pinia"],
+            "xe-utils": ["xe-utils"],
           },
           plugins: [dynamicImportVars()],
         },
       },
       chunkSizeWarningLimit: 1300,
-      minify:"terser",
-      cssCodeSplit:true,
+      minify: "terser",
+      cssCodeSplit: true,
     },
     optimizeDeps: {
       include: [
-        "element-plus/lib/locale/lang/zh-cn",
-        "element-plus/lib/locale/lang/en",
         "vxe-table/lib/locale/lang/zh-CN",
         "vxe-table/lib/locale/lang/en-US",
       ],

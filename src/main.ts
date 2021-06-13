@@ -1,7 +1,6 @@
-import "element-plus/packages/theme-chalk/src/base.scss"
 import { createApp } from "vue";
 import App from "./App";
-import { setupEle } from "@plugins/element";
+import { setupNaive } from "@plugins/naive-ui";
 import { setupStore } from "@store/index";
 import "@styles/reset.scss";
 import "@styles/element.scss";
@@ -23,33 +22,36 @@ import { baseConfig } from "@config/base.config";
 import { useSysStore } from "@store/sys";
 import { errorHander } from "@utils/errorHander";
 const app = createApp(App);
-setupEle(app); //安装elemet plus
+setupNaive(app); //setup Naive-ui
 setupDirective(app); //指令
 setupI18n(app); //国际化
 setupStore(app); //安装store
 setupVxe(app); //vxe
 setupRouter(app); //router
 asyncComponent(app); //异步组件
-errorHander(app)
+errorHander(app);
 useVisibility.init(); //趣味功能
 app.use(echarts); //echarts
 app.use(createHead());
-const db= new Use_DB({
-  name:baseConfig.sqlName || "baseSource",
-  version:baseConfig.sqlVersion || 1,
-  storeName:"base"
-})
-const sys = useSysStore()
+const db = new Use_DB({
+  name: baseConfig.sqlName || "baseSource",
+  version: baseConfig.sqlVersion || 1,
+  storeName: "base",
+});
+const sys = useSysStore();
 sys.$patch({
-  baseSql:db
-})
-router.isReady().then(()=>{
+  baseSql: db,
+});
+router
+  .isReady()
+  .then(() => {
     app.mount("#app");
-}).finally(()=>{
-  try{
-    app.config.compilerOptions.isCustomElement = tag => tag.startsWith('css-')
-  } catch(e){
-    console.log(e)
-  }
-})
-
+  })
+  .finally(() => {
+    try {
+      app.config.compilerOptions.isCustomElement = tag =>
+        tag.startsWith("css-");
+    } catch (e) {
+      console.log(e);
+    }
+  });

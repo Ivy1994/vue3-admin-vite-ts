@@ -9,6 +9,10 @@ html {
       -ms-animation: blink 2s linear infinite;
       -o-animation: blink 2s linear infinite;
     }
+    .bg-wallpaper {
+      background-image: url("@assets/img/login_bg.png");
+      background-size: cover;
+    }
     .login-input {
       .el-input__inner {
         opacity: 0.6;

@@ -5,7 +5,6 @@ import { userInfo } from "./modules/types";
 import { userModel } from "@apis/user";
 import { addRoute } from "@config/router.permission";
 import asyncRouter from "@router/asyncRoute/async.router";
-import { ElNotification } from "element-plus";
 //@ts-ignore
 import { NoPermissionMsg } from "@types/config.types";
 
@@ -60,11 +59,11 @@ export const useUserStore = defineStore({
               permissions,
             });
             if (!permissions.length) {
-              ElNotification({
-                title: "警告",
-                message: NoPermissionMsg.NOT,
-                type: "error",
-              });
+              // ElNotification({
+              //   title: "警告",
+              //   message: NoPermissionMsg.NOT,
+              //   type: "error",
+              // });
               removeToken();
             }
             addRoute(asyncRouter as any);

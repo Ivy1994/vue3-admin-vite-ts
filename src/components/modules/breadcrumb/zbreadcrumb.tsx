@@ -1,9 +1,14 @@
-import { defineComponent, reactive, ref } from "@vue/runtime-core";
+import { defineComponent, withModifiers, reactive, ref, computed } from "vue";
+import { NBreadcrumb, NBreadcrumbItem } from "naive-ui";
 import { useSysStore } from "@store/sys";
-import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { AppRouteRecordRawT } from "@router/types";
 const zBreadcrumb = defineComponent({
   name: "zBreadcrumb",
+  components: {
+    NBreadcrumb,
+    NBreadcrumbItem,
+  },
   setup(prop, ctx) {
     const useStore = useSysStore();
     const isExp = computed(() => {
@@ -13,6 +18,17 @@ const zBreadcrumb = defineComponent({
       return useStore.theme === "dark";
     });
     const route = useRoute();
+    const routre = useRouter();
+    const to = route => {
+      if (!isActiveValue(route.name)) {
+        routre.push({
+          name: route.name,
+        });
+      }
+    };
+    const isActiveValue = (name): boolean => {
+      return name === route.name;
+    };
     const exp = () => {
       /* 改变全局状态 */
       useStore.$patch({
@@ -25,21 +41,28 @@ const zBreadcrumb = defineComponent({
           onClick={exp}
           class={
             "el-icon-s-unfold font-light  text-xl cursor-pointer transform hover:scale-110 duration-500" +
-            (isExp.value ? " rotate-180" : "")+(isDark.value?" text-gray-100":" text-gray-600")
+            (isExp.value ? " rotate-180" : "") +
+            (isDark.value ? " text-gray-100" : " text-gray-600")
           }
         ></i>
-        <el-breadcrumb
-          separator-class="el-icon-arrow-right text-red-300 "
-          class={"px-4 w-max text-base "+(isDark.value?" text-gray-100":" text-gray-600")}
+        <NBreadcrumb
+          class={
+            "px-4 w-max text-base " +
+            (isDark.value ? " text-gray-100" : " text-gray-600")
+          }
         >
           {route.matched.map(v => {
             return (
-              <el-breadcrumb-item class={isDark.value?" text-gray-100":" text-gray-600"} to={v.path}>
-                {v.meta.title}
-              </el-breadcrumb-item>
+              <NBreadcrumbItem
+                class={isDark.value ? " text-gray-100" : " text-gray-600"}
+              >
+                <span style="cursor:pointer" onClick={to.bind(this, v)}>
+                  {v.meta.title}
+                </span>
+              </NBreadcrumbItem>
             );
           })}
-        </el-breadcrumb>
+        </NBreadcrumb>
       </div>
     );
   },

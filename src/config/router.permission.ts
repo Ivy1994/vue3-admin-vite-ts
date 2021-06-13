@@ -6,7 +6,6 @@ import { useRouteStore } from "@store/routes";
 import { filterRoutes } from "@router/utils";
 import { AppRouteRecordRawT } from "@router/types";
 import { baseConfig } from "./base.config";
-import { ElNotification } from "element-plus";
 //@ts-ignore
 import { NoPermissionMsg } from "@types/config.types";
 import { useSysStore } from "@store/sys";
@@ -23,11 +22,11 @@ export const addRoute = (routers: AppRouteRecordRawT[]) => {
       router.addRoute(v as RouteRecordRaw);
     });
   } else {
-    ElNotification({
-      title: "警告",
-      message: NoPermissionMsg.HAS,
-      type: "error",
-    });
+    // ElNotification({
+    //   title: "警告",
+    //   message: NoPermissionMsg.HAS,
+    //   type: "error",
+    // });
     removeToken();
   }
 };
