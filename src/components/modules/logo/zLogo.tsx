@@ -59,8 +59,8 @@ const zLogo = defineComponent({
                     <div>
                       <NTooltip
                         v-slots={{
-                          trigger: () => <span>消息</span>,
-                          default: () => (
+                          default: () => <span>消息</span>,
+                          trigger: () => (
                             <svg-icon
                               size={18}
                               name="message"
@@ -73,8 +73,8 @@ const zLogo = defineComponent({
                     <div>
                       <NTooltip
                         v-slots={{
-                          trigger: () => <span>待办</span>,
-                          default: () => (
+                          default: () => <span>待办</span>,
+                          trigger: () => (
                             <svg-icon size={18} name="todo"></svg-icon>
                           ),
                         }}
@@ -83,8 +83,8 @@ const zLogo = defineComponent({
                     <div>
                       <NTooltip
                         v-slots={{
-                          trigger: () => <span>登出</span>,
-                          default: () => (
+                          default: () => <span>登出</span>,
+                          trigger: () => (
                             <svg-icon
                               onClick={methodHandle.logout}
                               size={18}

@@ -1,22 +1,14 @@
 import { useRouteStore } from "@store/routes";
 import { useSysStore } from "@store/sys";
-import {
-  computed,
-  createVNode,
-  defineComponent,
-  TransitionGroup,
-  h,
-  VNodeChild,
-} from "vue";
+import { computed, defineComponent, TransitionGroup, h } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
 import { changeTheme } from "@utils/theme";
 import { getRouteByName } from "@router/utils";
-import { MenuOption, NIcon, NMenu } from "naive-ui";
+import { MenuOption, NIcon, NMenu, NDrawer, NDrawerContent } from "naive-ui";
 const zSlider = defineComponent({
   name: "zSlider",
   components: { TransitionGroup },
-
   setup(prop, ctx) {
     const sysStore = useSysStore();
     const isCollapse = computed(() => {
@@ -92,13 +84,8 @@ const zSlider = defineComponent({
       <>
         <div
           class={
-            "h-screen max-w-xl hidden mmd:block delay-300	 ease-in-out transition-all" +
+            "h-screen max-w-xl border-r-2 hidden mmd:block delay-300	 ease-in-out transition-all" +
             (isCollapse.value ? " w-20" : "  w-40 md:w-64")
-          }
-          style={
-            isDark.value
-              ? "border-right:1px solid #999"
-              : "box-shadow:5px 0 10px #999"
           }
         >
           <z-logo></z-logo>
@@ -106,32 +93,27 @@ const zSlider = defineComponent({
             onUpdateValue={handleSelect}
             defaultValue={activePAth.value as any}
             options={menudata}
+            collapsed={isCollapse.value}
+            inverted={isDark.value}
+            collapsedWidth={60}
           ></NMenu>
         </div>
-        <div class="mmd:hidden h-screen">
-          {/* <el-drawer
-            modelValue={isCollapse.value}
-            direction="ltr"
-            destroy-on-close
-            with-header={false}
-            size="60%"
-            before-close={beforeClose}
+        <div id="mobail-box" class="mmd:hidden h-screen">
+          <NDrawer
+            onUpdateShow={beforeClose}
+            placement="left"
+            show={isCollapse.value}
+            to="#mobail-box"
           >
-            <div>
+            <NDrawerContent>
               <z-logo></z-logo>
-              <el-menu
-                default-active={activePAth.value}
-                onSelect={handleSelect}
-                menu-trigger="click"
-                active-text-color="#F87171"
-                class="w-full h-auto slider-bar"
-                background-color={isDark.value ? "#000" : "#fff"}
-                text-color={isDark.value ? "#aaa" : "#303133"}
-                unique-opened={true}
-              >
-                {slot(routeStore.asyncRouts)}
-              </el-menu>
-              <div class="w-full h-20 absolute bottom-3 text-center">
+              <NMenu
+                onUpdateValue={handleSelect}
+                defaultValue={activePAth.value as any}
+                options={menudata}
+                inverted={isDark.value}
+              ></NMenu>
+              <div class="w-full h-20 text-center">
                 {isDark.value ? (
                   <svg-icon
                     size={20}
@@ -148,8 +130,8 @@ const zSlider = defineComponent({
                   ></svg-icon>
                 )}
               </div>
-            </div>
-          </el-drawer> */}
+            </NDrawerContent>
+          </NDrawer>
         </div>
       </>
     );

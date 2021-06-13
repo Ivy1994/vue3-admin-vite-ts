@@ -1,8 +1,9 @@
 import { defineComponent, withModifiers, reactive, ref, computed } from "vue";
-import { NBreadcrumb, NBreadcrumbItem } from "naive-ui";
+import { NBreadcrumb, NBreadcrumbItem, NIcon } from "naive-ui";
 import { useSysStore } from "@store/sys";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@vicons/antd";
 const zBreadcrumb = defineComponent({
   name: "zBreadcrumb",
   components: {
@@ -37,14 +38,9 @@ const zBreadcrumb = defineComponent({
     };
     return () => (
       <div class="h-full pl-4 flex items-center truncate">
-        <i
-          onClick={exp}
-          class={
-            "el-icon-s-unfold font-light  text-xl cursor-pointer transform hover:scale-110 duration-500" +
-            (isExp.value ? " rotate-180" : "") +
-            (isDark.value ? " text-gray-100" : " text-gray-600")
-          }
-        ></i>
+        <NIcon size={20} onClick={exp} style="cursor:pointer">
+          {isExp.value ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+        </NIcon>
         <NBreadcrumb
           class={
             "px-4 w-max text-base " +
