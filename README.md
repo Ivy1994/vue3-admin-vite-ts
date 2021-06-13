@@ -1,6 +1,6 @@
 # vite2 + typescript +vue3
 
-
+## 两个版本，注意切换分支哦~
 ## 预览地址
 
 #### [git-pages](https://zy94xhn.github.io/vue3-admin-vite-ts/#/login)https://zy94xhn.github.io/vue3-admin-vite-ts/#/login
