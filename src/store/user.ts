@@ -6,8 +6,7 @@ import { userModel } from "@apis/user";
 import { addRoute } from "@config/router.permission";
 import asyncRouter from "@router/asyncRoute/async.router";
 //@ts-ignore
-import { NoPermissionMsg } from "@types/config.types";
-
+import { useNotification } from "naive-ui";
 // useStore could be anything like useUser, useCart
 const state: userInfo = {
   username: "",
@@ -59,6 +58,7 @@ export const useUserStore = defineStore({
               permissions,
             });
             if (!permissions.length) {
+              const note = useNotification();
               // ElNotification({
               //   title: "警告",
               //   message: NoPermissionMsg.NOT,

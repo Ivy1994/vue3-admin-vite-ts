@@ -2,7 +2,7 @@ import { UserLoginForm } from "@apis/models/user";
 import { defineComponent, reactive, ref } from "vue";
 import { useUserStore } from "@store/user";
 import { useRouter } from "vue-router";
-import  type { NForm} from "naive-ui"
+import { NForm, NInput } from "naive-ui";
 const login = defineComponent({
   setup(prop, ctx) {
     const userStore = useUserStore();
@@ -21,8 +21,8 @@ const login = defineComponent({
 
     const buttonLoading = ref(false);
     const submitAction = () => {
-      loginForm.value.validate(val => {
-        if (val) {
+      loginForm.value.validate(errors => {
+        if (!errors) {
           buttonLoading.value = true;
           userStore
             .userLogin(submitForm)
@@ -34,6 +34,8 @@ const login = defineComponent({
             .catch(err => {
               buttonLoading.value = false;
             });
+        } else {
+          console.log(val);
         }
       });
     };
@@ -68,28 +70,22 @@ const login = defineComponent({
                   type="text"
                   size="medium"
                   class="login-input"
-                  vModel={submitForm.username}
-                  vSlots={userPreIcon}
+                  v-models={[[submitForm.username, "value", ["modifier"]]]}
                   placeholder="请输入用户账号/绑定手机号"
                 />
               </n-form-item-row>
               <n-form-item-row size="medium" path="password">
-                <n-input
-                  p
+                <NInput
                   type="password"
-                  size="medium"
                   class="login-input"
-                  vModel={submitForm.password}
-                  vSlots={userPwdPreIcon}
+                  v-models={[[submitForm.password, "value", ["modifier"]]]}
                   placeholder="请输入用户密码"
                 />
               </n-form-item-row>
             </n-form>
             <div class="w-full flex flex-row">
               <div class="w-1/2 text-left">
-                <n-checkbox vModel={submitForm.isRemenber}>
-                  记住密码
-                </n-checkbox>
+                <n-checkbox vModel={submitForm.isRemenber}>记住密码</n-checkbox>
               </div>
               <div class="text-gray-400 cursor-pointer hover:text-red-300 w-1/2 text-right">
                 忘记密码?

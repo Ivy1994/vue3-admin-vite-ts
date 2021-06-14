@@ -29,10 +29,7 @@ const zLogo = defineComponent({
     return () => (
       <div class=" py-10 flex flex-col items-center w-full justify-center cursor-pointer overflow-hidden">
         {isShowName.value ? (
-          <NAvatar
-            round
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          ></NAvatar>
+          <NAvatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></NAvatar>
         ) : (
           <NPopover
             showArrow={false}
@@ -48,8 +45,7 @@ const zLogo = defineComponent({
                   <div class="w-full h-full flex flex-col">
                     <div
                       class={
-                        "px-4  w-full text-center truncate font-sans tracking-wide  antialiased" +
-                        (isDark.value ? " text-gray-600" : " text-gray-800")
+                        "px-4  w-full text-center truncate font-sans tracking-wide  antialiased"
                       }
                     >
                       {user.username}
