@@ -34,8 +34,6 @@ const login = defineComponent({
             .catch(err => {
               buttonLoading.value = false;
             });
-        } else {
-          console.log(val);
         }
       });
     };
