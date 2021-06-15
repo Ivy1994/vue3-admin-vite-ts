@@ -1,14 +1,12 @@
 import { useRouteStore } from "@store/routes";
 import { useSysStore } from "@store/sys";
-import { computed, defineComponent, TransitionGroup } from "vue";
+import { computed, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { AppRouteRecordRawT } from "@router/types";
 import { changeTheme } from "@utils/theme";
 import {getRouteByName} from "@router/utils"
 const zSlider = defineComponent({
   name: "zSlider",
-  components: { TransitionGroup },
-
   setup(prop, ctx) {
     const sysStore = useSysStore();
     const isCollapse = computed(() => {
