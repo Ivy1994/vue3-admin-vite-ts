@@ -1,6 +1,6 @@
 # vite2 + typescript +vue3
 
-## 两个版本，注意切换分支哦~
+## 两个版本，注意切换分支哦~(目前切换到gitee国内地址开发，更新时间不确定，目前换工作，比较忙，有什么需要加入项目的可以提到is里面)
 ## 预览地址
 
 #### [git-pages](https://zy94xhn.github.io/vue3-admin-vite-ts/#/login)https://zy94xhn.github.io/vue3-admin-vite-ts/#/login
